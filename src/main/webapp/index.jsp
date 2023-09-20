@@ -1,12 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>Title</title>
 </head>
 <body>
- <form action="api" >
-     <input type="submit" value="submit"/>
- </form>
+
 </body>
 </html>

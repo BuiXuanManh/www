@@ -1,8 +1,7 @@
 package com.example.week.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.example.week.enums.AccountStatus;
+import jakarta.persistence.*;
 
 @Entity
 public class Account {
@@ -12,13 +11,14 @@ public class Account {
     private String password;
     private String email;
     private String phone;
-    @Column(columnDefinition = "tinyint")
-    private int status;
+    @Column(columnDefinition = "tinyint(4)")
+    @Enumerated(EnumType.ORDINAL)
+    private AccountStatus status;
 
     public Account() {
     }
 
-    public Account(String account_id, String full_name, String password, String email, String phone, int status) {
+    public Account(String account_id, String full_name, String password, String email, String phone, AccountStatus status) {
         this.account_id = account_id;
         this.full_name = full_name;
         this.password = password;
@@ -67,11 +67,11 @@ public class Account {
         this.phone = phone;
     }
 
-    public int getStatus() {
+    public AccountStatus getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(AccountStatus  status) {
         this.status = status;
     }
 

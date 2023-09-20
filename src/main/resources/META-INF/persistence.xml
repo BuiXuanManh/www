@@ -5,8 +5,16 @@
              version="3.0">
     <persistence-unit name="default">
     <properties>
-        <property name="dialect" value="org.hibernate.dialect.MariaDBDialect"></property>
-        <property name="connection.url" value="jdbc:mariadb://xxxxxx:3306/dbname"></property>
+        <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver" />
+        <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/week1" />
+        <property name="javax.persistence.jdbc.user" value="username" />
+        <property name="javax.persistence.jdbc.password" value="password" />
+
+        <!-- Cấu hình Hibernate -->
+        <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect" />
+        <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+        <property name="hibernate.show_sql" value="true" />
+        <property name="hibernate.format_sql" value="true" />
     </properties>
     </persistence-unit>
 </persistence>
