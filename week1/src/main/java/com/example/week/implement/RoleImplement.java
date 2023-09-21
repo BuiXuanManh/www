@@ -11,10 +11,6 @@ public class RoleImplement implements RoleService {
     @Inject
     private RoleRepository repository;
 
-    public RoleImplement() {
-        this.repository = new RoleRepository();
-    }
-
     @Override
     public List<Role> getAll() {
         return repository.getAll();

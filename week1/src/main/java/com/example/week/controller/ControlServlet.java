@@ -37,12 +37,6 @@ public class ControlServlet extends HttpServlet {
     @Inject
     private LogService logService;
 
-    public ControlServlet() {
-        this.accountService = new AccountImplement();
-        this.roleService = new RoleImplement();
-        this.gService= new GrantAccessImpl();
-        this.logService= new LogImplement();
-    }
 
     private Logger logger;
 

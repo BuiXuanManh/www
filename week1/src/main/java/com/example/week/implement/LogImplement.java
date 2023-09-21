@@ -11,10 +11,6 @@ public class LogImplement implements LogService {
     @Inject
     private LogRepository repository;
 
-    public LogImplement() {
-        this.repository = new LogRepository();
-    }
-
     @Override
     public boolean createLog(Log log) {
         return repository.createLog(log);

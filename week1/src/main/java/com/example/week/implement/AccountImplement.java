@@ -12,9 +12,6 @@ public class AccountImplement implements AccountService {
     @Inject
     private AccountRepository repository;
 
-    public AccountImplement() {
-        this.repository = new AccountRepository();
-    }
 
     @Override
     public List<Account> getAll() {
