@@ -1,2 +1,2 @@
 # www_week1
-the first application jakartaEE CRUD maria and inject basic servlet
+the first application jakartaEE sign in

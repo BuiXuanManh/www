@@ -3,8 +3,8 @@ package com.example.week.implement;
 import com.example.week.models.Account;
 import com.example.week.enums.AccountStatus;
 import com.example.week.models.Role;
-import com.example.week.resource.AccountRepository;
-import com.example.week.service.AccountService;
+import com.example.week.resources.AccountRepository;
+import com.example.week.services.AccountService;
 import jakarta.inject.Inject;
 
 import java.util.List;

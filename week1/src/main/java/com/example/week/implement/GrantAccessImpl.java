@@ -1,8 +1,8 @@
 package com.example.week.implement;
 
 import com.example.week.models.GrantAccess;
-import com.example.week.resource.GrantAccessRepository;
-import com.example.week.service.GrantAccessService;
+import com.example.week.resources.GrantAccessRepository;
+import com.example.week.services.GrantAccessService;
 import jakarta.inject.Inject;
 
 public class GrantAccessImpl implements GrantAccessService {

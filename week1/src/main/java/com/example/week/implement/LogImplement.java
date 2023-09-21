@@ -1,8 +1,8 @@
 package com.example.week.implement;
 
 import com.example.week.models.Log;
-import com.example.week.resource.LogRepository;
-import com.example.week.service.LogService;
+import com.example.week.resources.LogRepository;
+import com.example.week.services.LogService;
 import jakarta.inject.Inject;
 
 import java.util.List;

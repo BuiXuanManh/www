@@ -1,8 +1,8 @@
 package com.example.week.implement;
 
 import com.example.week.models.Role;
-import com.example.week.resource.RoleRepository;
-import com.example.week.service.RoleService;
+import com.example.week.resources.RoleRepository;
+import com.example.week.services.RoleService;
 import jakarta.inject.Inject;
 
 import java.util.List;
