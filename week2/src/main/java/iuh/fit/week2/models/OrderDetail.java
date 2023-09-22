@@ -7,11 +7,11 @@ import jakarta.persistence.*;
 public class OrderDetail {
     @Id
     @ManyToOne
-    @Column(name = "order_id")
+    @JoinColumn(name = "order_id")
     private Order order;
     @Id
     @ManyToOne
-    @Column(name = "product_id")
+    @JoinColumn(name = "product_id")
     private Product product;
     @Column(name = "quantity")
     private int quantity;

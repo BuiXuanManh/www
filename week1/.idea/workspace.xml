@@ -10,40 +10,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb1ab522-d399-4ac4-931c-610d2a0d4941" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/controllers/ControlServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/implement/CustomerImplement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/implement/EmployeeImplement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/implement/OrderImplement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/implement/ProductImplement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/repositories/Connection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/repositories/CustomerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/repositories/EmployeeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/repositories/OrderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/repositories/ProductRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/services/CustomerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/services/EmployeeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/services/OrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/services/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/controller/ControlServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/controllers/ControlServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/implement/AccountImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/implement/AccountImplement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/implement/GrantAccessImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/implement/GrantAccessImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/implement/LogImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/implement/LogImplement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/implement/RoleImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/implement/RoleImplement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/resource/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/resources/AccountRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/resource/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/resources/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/resource/GrantAccessRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/resources/GrantAccessRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/resource/LogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/resources/LogRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/resource/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/resources/RoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/services/AccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/service/GrantAccessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/services/GrantAccessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/service/LogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/services/LogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/services/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/controllers/ControlServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/controllers/ControlServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/week/resources/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/week/resources/Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/src/main/java/vn/edu/iuh/fit/week2/HelloApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/src/main/java/vn/edu/iuh/fit/week2/HelloResource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/src/main/resources/META-INF/beans.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../week2/src/main/resources/hibernate.cfg.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/OrderDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/OrderDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/ProductImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/ProductImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/ProductPrice.java" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/src/main/java/iuh/fit/week2/models/ProductPrice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/src/main/resources/META-INF/persistence.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +95,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/www/github/www_week1/week1",
+    "last_opened_file_path": "D:/www/github/www_week1/week2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -110,8 +105,8 @@
   }
 }]]></component>
   <component name="RunManager">
-    <configuration name="Tomcat 10.1.13" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.13" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/ControlServlet" />
+    <configuration name="Tomcat 10.1.13" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.13" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="$PROJECT_DIR$/../../../../dowload/jdk-20.0.1" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/ControlServlet1" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="Week:war exploded">
@@ -218,6 +213,7 @@
       <workItem from="1695221296892" duration="196000" />
       <workItem from="1695276751245" duration="7273000" />
       <workItem from="1695300886806" duration="1061000" />
+      <workItem from="1695370692846" duration="648000" />
     </task>
     <servers />
   </component>

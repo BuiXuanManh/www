@@ -1,10 +1,14 @@
 package iuh.fit.week2.models;
 
 import iuh.fit.week2.enums.EmployeeStatus;
+import jakarta.inject.Named;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "employee")
+@NamedQueries(
+        @NamedQuery(name = "Employee.findAll",query = "SELECT e FROM Employee e WHERE e.status = 1")
+)
 public class Employee {
     @Id
     @Column(name = "emp_id")

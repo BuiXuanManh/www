@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "product")
+@NamedQueries(
+        @NamedQuery(name = "Product.findAll",query = "SELECT e FROM Product e WHERE e.status = 1")
+)
 public class Product {
     @Id
     @Column(name = "product_id")

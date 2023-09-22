@@ -1,12 +1,12 @@
 package iuh.fit.week2.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "customer")
+@NamedQueries(
+        @NamedQuery(name = "Customer.findAll",query = "SELECT e FROM Customer e")
+)
 public class Customer {
     @Id
     @Column(name = "cust_id")

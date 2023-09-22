@@ -1,14 +1,16 @@
-package com.example.week.resources;
+package iuh.fit.week2.repositories;
 
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jdk.jfr.Percentage;
 
 public class Connection {
-    private EntityManagerFactory emf;
     private static Connection instance;
+    private EntityManagerFactory emf;
 
     private Connection() {
         emf= Persistence.createEntityManagerFactory("default");
+
     }
 
     public static Connection getInstance() {

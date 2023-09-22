@@ -4,6 +4,7 @@ import com.example.week.enums.AccountStatus;
 import com.example.week.enums.GrantStatus;
 import com.example.week.enums.RoleStatus;
 import com.example.week.models.*;
+import com.example.week.resources.AccountRepository;
 import com.example.week.services.AccountService;
 import com.example.week.services.GrantAccessService;
 import com.example.week.services.LogService;
@@ -21,7 +22,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/ControlServlet"})
+@WebServlet(urlPatterns = {"/ControlServlet1"})
 public class ControlServlet extends HttpServlet {
 
     @Inject
@@ -38,6 +39,8 @@ public class ControlServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        AccountRepository a= new AccountRepository();
+        a.getAll();
         RequestDispatcher dispatcher = req.getRequestDispatcher("create.jsp");
         dispatcher.forward(req, resp);
     }

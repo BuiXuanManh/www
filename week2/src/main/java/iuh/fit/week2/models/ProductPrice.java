@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 public class ProductPrice {
     @Id
     @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
     @Id
     @Column(name = "price_date_time")

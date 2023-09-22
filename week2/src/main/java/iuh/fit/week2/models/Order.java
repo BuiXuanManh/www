@@ -6,15 +6,18 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "order")
+@NamedQueries(
+        @NamedQuery(name = "Order.findAll",query = "SELECT e FROM Order e")
+)
 public class Order {
     @Id
     private String orderId;
     private LocalDateTime order_date;
     @ManyToOne
-    @Column(name = "emp_id")
+    @JoinColumn(name = "emp_id")
     private Employee employee;
     @ManyToOne
-    @Column(name = "cust_id")
+    @JoinColumn(name = "cust_id")
     private Customer customer;
 
     public String getOrderId() {
