@@ -8,8 +8,9 @@ import jakarta.inject.Inject;
 import java.util.List;
 
 public class EmployeeImplement implements EmployeeService  {
-    @Inject
-    private EmployeeRepository repository;
+//    @Inject
+//    private EmployeeRepository employeeRepository;
+    private EmployeeRepository repository= new EmployeeRepository();
     @Override
     public boolean create(Employee e) {
         return repository.create(e);

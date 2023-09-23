@@ -8,8 +8,9 @@ import jakarta.inject.Inject;
 import java.util.List;
 
 public class OrderImplement implements OrderService {
-    @Inject
-    private OrderRepository repository;
+//    @Inject
+//    private OrderRepository orderRepository;
+    private OrderRepository repository= new OrderRepository();
     @Override
     public boolean create(Order o) {
         return repository.create(o);

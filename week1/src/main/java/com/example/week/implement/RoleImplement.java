@@ -8,8 +8,9 @@ import jakarta.inject.Inject;
 import java.util.List;
 
 public class RoleImplement implements RoleService {
-    @Inject
-    private RoleRepository repository;
+//    @Inject
+//    private RoleRepository repository;
+private RoleRepository repository= new RoleRepository();
 
     @Override
     public List<Role> getAll() {

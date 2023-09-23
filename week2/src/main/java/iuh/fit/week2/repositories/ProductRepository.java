@@ -15,15 +15,14 @@ public class ProductRepository {
 
     public ProductRepository() {
         em= Connection.getInstance().getEmf().createEntityManager();
-
+        tr=em.getTransaction();
     }
 
     public boolean create(Product e) {
-        tr=em.getTransaction();
+        tr.begin();
         try {
-
-            tr.begin();
             em.persist(e);
+            tr.commit();
             return true;
         }catch (Exception ex){
             tr.rollback();
@@ -32,11 +31,10 @@ public class ProductRepository {
         return false;
     }
     public boolean update(Product e) {
-        tr=em.getTransaction();
+        tr.begin();
         try {
-
-            tr.begin();
             em.merge(e);
+            tr.commit();
             return true;
         }catch (Exception ex){
             tr.rollback();

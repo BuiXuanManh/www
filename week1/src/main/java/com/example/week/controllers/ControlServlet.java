@@ -3,6 +3,10 @@ package com.example.week.controllers;
 import com.example.week.enums.AccountStatus;
 import com.example.week.enums.GrantStatus;
 import com.example.week.enums.RoleStatus;
+import com.example.week.implement.AccountImplement;
+import com.example.week.implement.GrantAccessImpl;
+import com.example.week.implement.LogImplement;
+import com.example.week.implement.RoleImplement;
 import com.example.week.models.*;
 import com.example.week.resources.AccountRepository;
 import com.example.week.services.AccountService;
@@ -25,15 +29,18 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/ControlServlet1"})
 public class ControlServlet extends HttpServlet {
 
-    @Inject
-    private AccountService accountService;
-    @Inject
-    private RoleService roleService;
-    @Inject
-    private GrantAccessService gService;
-    @Inject
-    private LogService logService;
-
+//    @Inject
+//    private AccountService accountService;
+//    @Inject
+//    private RoleService roleService;
+//    @Inject
+//    private GrantAccessService gService;
+//    @Inject
+//    private LogService logService;
+    private AccountService accountService= new AccountImplement();
+    private RoleService roleService= new RoleImplement();
+    private GrantAccessService gService= new GrantAccessImpl();
+    private LogService logService= new LogImplement();
 
     private Logger logger;
 

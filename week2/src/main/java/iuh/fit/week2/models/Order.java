@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @NamedQueries(
         @NamedQuery(name = "Order.findAll",query = "SELECT e FROM Order e")
 )

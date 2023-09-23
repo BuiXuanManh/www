@@ -6,8 +6,9 @@ import com.example.week.services.GrantAccessService;
 import jakarta.inject.Inject;
 
 public class GrantAccessImpl implements GrantAccessService {
-    @Inject
-    private GrantAccessRepository repository;
+//    @Inject
+//    private GrantAccessRepository repository;
+private GrantAccessRepository repository= new GrantAccessRepository();
     @Override
     public boolean grantAccess(GrantAccess grantAccess) {
         return repository.grantAccess(grantAccess);

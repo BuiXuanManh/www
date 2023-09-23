@@ -15,32 +15,29 @@ public class OrderRepository {
 
     public OrderRepository() {
         em= Connection.getInstance().getEmf().createEntityManager();
-
+        tr=em.getTransaction();
     }
 
     public boolean create(Order e) {
-        tr=em.getTransaction();
-        try {
-
             tr.begin();
+        try {
             em.persist(e);
+            tr.commit();
             return true;
         }catch (Exception ex){
             tr.rollback();
-            logger.error("error insert order");
+            ex.printStackTrace();
         }
         return false;
     }
     public boolean update(Order e) {
-        tr=em.getTransaction();
+        tr.begin();
         try {
-
-            tr.begin();
             em.merge(e);
             return true;
         }catch (Exception ex){
             tr.rollback();
-            logger.error("error update order");
+            ex.printStackTrace();
         }
         return false;
     }

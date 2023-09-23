@@ -9,9 +9,9 @@ import jakarta.inject.Inject;
 
 import java.util.List;
 public class AccountImplement implements AccountService {
-    @Inject
-    private AccountRepository repository;
-
+//    @Inject
+//    private AccountRepository repository;
+    private AccountRepository repository= new AccountRepository();
 
     @Override
     public List<Account> getAll() {

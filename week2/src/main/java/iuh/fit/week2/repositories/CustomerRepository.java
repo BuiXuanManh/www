@@ -11,35 +11,32 @@ import java.util.List;
 public class CustomerRepository {
     private EntityManager em;
     private EntityTransaction tr;
-    private Logger logger;
 
     public CustomerRepository() {
         em= Connection.getInstance().getEmf().createEntityManager();
-
-    }
-
-    public boolean createCust(Customer e) {
         tr=em.getTransaction();
+    }
+    public boolean createCust(Customer e) {
+        tr.begin();
         try {
-
-            tr.begin();
             em.persist(e);
+            tr.commit();
             return true;
         }catch (Exception ex){
             tr.rollback();
-            logger.error("error insert cust");
+            ex.printStackTrace();
         }
         return false;
     }
     public boolean update(Customer e) {
-        tr=em.getTransaction();
+        tr.begin();
         try {
-            tr.begin();
             em.merge(e);
+            tr.commit();
             return true;
         }catch (Exception ex){
             tr.rollback();
-            logger.error("error update cust");
+            ex.printStackTrace();
         }
         return false;
     }

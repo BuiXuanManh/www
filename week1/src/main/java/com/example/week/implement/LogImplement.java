@@ -8,8 +8,9 @@ import jakarta.inject.Inject;
 import java.util.List;
 
 public class LogImplement implements LogService {
-    @Inject
-    private LogRepository repository;
+//    @Inject
+//    private LogRepository repository;
+    private LogRepository repository= new LogRepository();
 
     @Override
     public boolean createLog(Log log) {

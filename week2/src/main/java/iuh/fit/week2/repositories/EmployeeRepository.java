@@ -10,36 +10,34 @@ import java.util.List;
 public class EmployeeRepository {
     private EntityManager em;
     private EntityTransaction tr;
-    private Logger logger;
 
     public EmployeeRepository() {
-        em= Connection.getInstance().getEmf().createEntityManager();
-
+        em = Connection.getInstance().getEmf().createEntityManager();
+        tr = em.getTransaction();
     }
 
     public boolean create(Employee e) {
-        tr=em.getTransaction();
+        tr.begin();
         try {
-
-            tr.begin();
             em.persist(e);
+            tr.commit();
             return true;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             tr.rollback();
-            logger.error("error insert emp");
+            ex.printStackTrace();
         }
         return false;
     }
-    public boolean update(Employee e) {
-        tr=em.getTransaction();
-        try {
 
-            tr.begin();
+    public boolean update(Employee e) {
+        tr.begin();
+        try {
             em.merge(e);
+            tr.commit();
             return true;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             tr.rollback();
-            logger.error("error update emp");
+
         }
         return false;
     }

@@ -4,6 +4,8 @@ import iuh.fit.week2.enums.EmployeeStatus;
 import jakarta.inject.Named;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "employee")
 @NamedQueries(
@@ -16,7 +18,7 @@ public class Employee {
     @Column(name = "full_name")
     private String fullName;
     @Column(name = "dob")
-    private String dob;
+    private LocalDate dob;
     @Column(name = "email")
     private String email;
     @Column(name = "phone")
@@ -26,7 +28,7 @@ public class Employee {
     @Enumerated(EnumType.ORDINAL)
     private EmployeeStatus status;
 
-    public Employee(String empId, String fullName, String dob, String email, String phone, String address, EmployeeStatus status) {
+    public Employee(String empId, String fullName, LocalDate dob, String email, String phone, String address, EmployeeStatus status) {
         this.empId = empId;
         this.fullName = fullName;
         this.dob = dob;
@@ -52,11 +54,11 @@ public class Employee {
         this.fullName = fullName;
     }
 
-    public String getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
