@@ -1,5 +1,6 @@
 # www_week1
   Tạo servlet ControlServlet (partern cùng tên).
+  <hr/>
   Kết nối với csdl:
 - Thêm, cập nhật, xóa ở các bảng đã cho.
 - Đăng nhập
