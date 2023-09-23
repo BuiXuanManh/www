@@ -37,10 +37,10 @@ public class ControlServlet extends HttpServlet {
 //    private GrantAccessService gService;
 //    @Inject
 //    private LogService logService;
-    private AccountService accountService= new AccountImplement();
-    private RoleService roleService= new RoleImplement();
-    private GrantAccessService gService= new GrantAccessImpl();
-    private LogService logService= new LogImplement();
+    private final AccountService accountService= new AccountImplement();
+    private final RoleService roleService= new RoleImplement();
+    private final GrantAccessService gService= new GrantAccessImpl();
+    private final LogService logService= new LogImplement();
 
     private Logger logger;
 
@@ -63,7 +63,7 @@ public class ControlServlet extends HttpServlet {
             String phone = req.getParameter("phone");
             String fullName = req.getParameter("fullName");
             Account a = new Account(newUsername, fullName, newPassword, email, phone, AccountStatus.ACTIVE);
-            accountService.create(a);
+//            accountService.create(a);
             logger.info("sign success");
             resp.sendRedirect("login.jsp");
         } else if ("updateAccount".equals(action)) {
