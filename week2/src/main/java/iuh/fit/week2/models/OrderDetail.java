@@ -16,11 +16,13 @@ public class OrderDetail {
     @Column(name = "quantity")
     private int quantity;
     @Column(name = "price")
-    private double price;
+    @ManyToOne
+    @JoinColumn(name = "price")
+    private ProductPrice price;
     @Column(name = "note")
     private String note;
 
-    public OrderDetail(Order order, Product product, int quantity, double price, String note) {
+    public OrderDetail(Order order, Product product, int quantity, ProductPrice price, String note) {
         this.order = order;
         this.product = product;
         this.quantity = quantity;
@@ -52,11 +54,11 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
+    public ProductPrice getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(ProductPrice price) {
         this.price = price;
     }
 

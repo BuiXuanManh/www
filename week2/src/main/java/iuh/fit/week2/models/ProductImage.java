@@ -4,7 +4,11 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "product_image")
+@NamedQueries(
+        @NamedQuery(name = "ProductImage.findAll",query = "SELECT e FROM ProductImage e")
+)
 public class ProductImage {
+    @Id
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
