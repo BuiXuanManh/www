@@ -36,4 +36,12 @@ xóa, sửa và cấp quyền).
 - Thống kê order theo nhân viên bán hàng trong 1 khoảng thời gian  (from date-> to date).
    <br>
 - Servlet run data.
+# www _week3
+CRUD Employee Spring boot
+- find
+- count
+- update
+- getAll
+- insert
+- delete
 
