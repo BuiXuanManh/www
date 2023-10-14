@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container col-md-6 justify-content-center card ">
+    <div class="mt-2">
+    <h1 class="text-center mt-3">Sign Up</h1>
+    </div>
+    <div class="card-body">
+        <form th:action="@{/user/signup/new}" method="post">
+
+            <div th:object="${candidate}">
+                <div class="form-group">
+                    <label>Full Name:</label>
+                    <input type="text" placeholder="Enter FullName" class="form-control" th:field="*{fullName}"/>
+                </div>
+                <div class="form-group">
+                    <label>Date of birth:</label>
+                    <input type="date" class="form-control" th:field="*{dob}"/>
+                </div>
+                <div class="form-group">
+                    <label>Phone:</label>
+                    <input type="text" placeholder="Enter Phone" class="form-control" th:field="*{phone}"/>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="text" placeholder="Enter Email" class="form-control" th:field="*{email}"/>
+                </div>
+                <div class="form-group">
+                    <label>City:</label>
+                    <input type="text" placeholder="Enter City" class="form-control" th:field="*{address.city}"/>
+                </div>
+                <div class="form-group">
+                    <label>Country Code:</label>
+                    <input type="text" placeholder="Enter Country Code" class="form-control"
+                           th:field="*{address.countryCode}"/>
+                </div>
+                <div class="form-group">
+                    <label>Zip Code:</label>
+                    <input type="text" placeholder="Enter Zip Code" class="form-control" th:field="*{address.zipcode}"/>
+                </div>
+                <div class="form-group">
+                    <label>Street:</label>
+                    <input type="text" placeholder="Enter Street" class="form-control" th:field="*{address.street}"/>
+                </div>
+                <div class="form-group">
+                    <label>Number:</label>
+                    <input type="text" placeholder="Enter Number" class="form-control" th:field="*{address.number}"/>
+                </div>
+            </div>
+            <div th:object="${user}">
+                <div class="form-group">
+                    <label>User Name:</label>
+                    <input type="text" placeholder="Enter UserName" class="form-control" th:field="*{userName}"/>
+                </div>
+                <div class="form-group">
+                    <label>PassWord:</label>
+                    <input type="password" placeholder="Enter Password" class="form-control" th:field="*{passWord}"/>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Sign up</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

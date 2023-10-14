@@ -22,4 +22,5 @@ public class Job {
     @ManyToOne
     @JoinColumn(name = "company")
     private Company company;
+    private String salary;
 }

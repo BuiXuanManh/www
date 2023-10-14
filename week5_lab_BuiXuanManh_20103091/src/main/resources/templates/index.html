@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Công ty<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Danh sách công ty</a></li>
+                        <li><a href="#">Top công ty</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tìm việc làm<span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Việc làm mới nhất</a></li>
+                        <li><a href="#">Ngành nghề</a></li>
+                        <li><a href="#">Địa điểm</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" >
+                <li th:if="${user == null}"><a th:href="@{/user/signup}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li th:if="${user== null}"><a th:href="@{/user/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li th:if="${user != null}"><a th:href="@{/user/profile}"><span class="glyphicon glyphicon-user"></span><span th:text="${user.getUserName()}"></span></a></li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <input type="text" id="myInput" onkeyup="filterFunction()" placeholder="Tìm kiếm...">
+        </div>
+        <div class="col-md-3">
+            <select class="select" data-mdb-filter="true" data-mdb-clear-button="true">
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+                <option value="4">Four</option>
+                <option value="5">Five</option>
+                <option value="6">Six</option>
+                <option value="7">Seven</option>
+                <option value="8">Eight</option>
+                <option value="9">Nine</option>
+                <option value="10">Ten</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-light">
+                <span class="glyphicon glyphicon-search"></span> Tìm kiếm
+            </button>
+
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-md-3" th:each="job:${jobs}">
+                <h2 th:text="${job.name}"></h2>
+                <p th:text="${job.description}"></p>
+                <p th:text="${job.company.getName()}"></p>
+                <p th:text="${job.salary}"></p>
+            </div>
+    </div>
+</div>
+</body>
+</html>
