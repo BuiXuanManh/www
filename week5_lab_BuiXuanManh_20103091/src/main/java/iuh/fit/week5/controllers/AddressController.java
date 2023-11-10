@@ -4,19 +4,25 @@ import com.neovisionaries.i18n.CountryCode;
 import iuh.fit.week5.entities.Address;
 import iuh.fit.week5.services.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/address")
 public class AddressController {
     @Autowired
     private AddressService addressService;
+    private int PAGE;
+    private int SIZE;
 
     @GetMapping
     public String getAll(Model model){
@@ -65,12 +71,36 @@ public class AddressController {
         b.setStreet(address.getStreet());
         b.setNumber(address.getNumber());
         addressService.save(b);
-        return "redirect:/address";
+        if(SIZE==0||PAGE==0){
+            return "redirect:/address";
+        }
+        return "redirect:/address/sort?page="+PAGE+"&size="+SIZE;
     }
-    @GetMapping("/delete/{id}")
-    public String deleteAddress(@PathVariable Long id){
-        addressService.delete(id);
-        return "redirect:/address";
+//    @GetMapping("/delete/{id}")
+//    public String deleteAddress(@PathVariable Long id){
+//        addressService.delete(id);
+//        if(SIZE==0||PAGE==0){
+//            return "redirect:/address";
+//        }
+//        return "redirect:/address/sort?page="+PAGE+"&size="+SIZE;
+//    }
+
+    @GetMapping("/sort")
+    public String getAllBySort(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size, RedirectAttributes redirectAttributes){
+        int currentPage= page.orElse(1);
+        int currentSize=size.orElse(10);
+        Page<Address> p = addressService.findPage(currentPage - 1, currentSize, "id", "asc");
+        model.addAttribute("pageAddress",p);
+        int totalPage= p.getTotalPages();
+        if(totalPage>0){
+            List<Integer> pageNumbers= IntStream.rangeClosed(1,totalPage).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNumbers",pageNumbers);
+            PAGE=currentPage;
+            SIZE=currentSize;
+        }
+
+
+        return "addressPaging";
     }
 
 }

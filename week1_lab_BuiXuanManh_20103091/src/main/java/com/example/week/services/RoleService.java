@@ -3,12 +3,13 @@ package com.example.week.services;
 import com.example.week.models.Role;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RoleService {
     List<Role> getAll();
-    Role findById(String id);
+    Optional<Role> findById(String id);
     boolean create(Role a);
     boolean update(Role a);
-    void delete(String id);
-
+    List<Role> findByAccId(String id);
+    Role findByRoleName(String name);
 }

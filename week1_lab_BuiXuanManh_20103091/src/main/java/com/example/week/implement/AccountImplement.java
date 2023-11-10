@@ -2,16 +2,20 @@ package com.example.week.implement;
 
 import com.example.week.models.Account;
 import com.example.week.enums.AccountStatus;
-import com.example.week.models.Role;
-import com.example.week.resources.AccountRepository;
+import com.example.week.repositories.AccountRepository;
 import com.example.week.services.AccountService;
-import jakarta.inject.Inject;
 
 import java.util.List;
+import java.util.Optional;
+
 public class AccountImplement implements AccountService {
 //    @Inject
 //    private AccountRepository repository;
-    private AccountRepository repository= new AccountRepository();
+    private AccountRepository repository;
+
+    public AccountImplement() {
+        repository= new AccountRepository();
+    }
 
     @Override
     public List<Account> getAll() {
@@ -19,7 +23,7 @@ public class AccountImplement implements AccountService {
     }
 
     @Override
-    public Account findById(String id) {
+    public Optional<Account> findById(String id) {
         return repository.find(id);
     }
 
@@ -34,8 +38,7 @@ public class AccountImplement implements AccountService {
     }
 
     @Override
-    public void delete(String userName) {
-        Account a = repository.find(userName);
+    public void delete(Account a) {
         a.setStatus(AccountStatus.DELETED);
     }
 
@@ -46,7 +49,8 @@ public class AccountImplement implements AccountService {
     }
 
     @Override
-    public Role findRole(String username) {
-        return repository.findRole(username);
+    public List<Account> findByNotAdmin(String name) {
+        return repository.findByNotAdmin(name);
     }
+
 }

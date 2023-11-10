@@ -1,5 +1,6 @@
 package iuh.fit.week5.entities;
 
+import iuh.fit.week5.enums.CandidateStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,5 +26,15 @@ public class Candidate {
     @OneToOne
     @JoinColumn(name = "address")
     private Address address;
-
+    @Column(columnDefinition = "int(6)")
+    @Enumerated(EnumType.ORDINAL)
+    private CandidateStatus candidateStatus;
+    public Candidate(String phone, LocalDate dob, String email, String fullName, Address address, CandidateStatus candidateStatus) {
+        this.phone = phone;
+        this.dob = dob;
+        this.email = email;
+        this.fullName = fullName;
+        this.address = address;
+        this.candidateStatus=candidateStatus;
+    }
 }

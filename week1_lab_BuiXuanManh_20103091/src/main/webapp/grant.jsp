@@ -52,7 +52,7 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <label >Tên Đăng Nhập:</label>
+            <label >Status:</label>
         </div>
         <div class="col-md-3">
             <label ><%=a.getStatus()%></label>
@@ -61,21 +61,49 @@
     <div class="row">
         <h3>Roles</h3>
     </div>
-    <%
-    for (Role r:l){
-    %>
-    <div class="row">
-        <div class="col-md-3">
-            <label ><%=r.getRole_name()%></label>
-        </div>
-        <div class="col-md-3">
-            <label ><%=r.getStatus()%></label>
-        </div>
-        <div class="col-md-3">
-            <label ><%=r.getDescription()%></label>
-        </div>
-    </div>
-    <%}%>
+        <form  method="post" action=<%="ControlServlet?action=grantP&&id="+ a.getAccount_id()%>>
+            <div class="row justify-content-center">
+                <div class="col-md-1">
+                    <label class="text-center">Add role:</label>
+                </div>
+                <div class="col-md-1">
+                    <select class="text-center" name="select">
+                        <option value="ADMIN" >ADMIN</option>
+                        <option value="USER" >USER</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+
+            </div>
+        </form>
+    <table class="table table-striped table-bordered table-hover">
+        <thead >
+        <tr>
+            <th>Role Name</th>
+            <th>Status</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%
+            for (Role r:l){
+        %>
+        <tr>
+            <th><%=r.getRole_name()%></th>
+            <th><%=r.getStatus()%></th>
+            <th><%=r.getDescription()%></th>
+            <th>
+                <a class="btn btn-danger" href=<%="ControlServlet?action=deleteGrant&&id="+a.getAccount_id()+"&&role="+r.getRole_name()%> >Delete</a>
+            </th>
+        </tr>
+        <%}%>
+        </tbody>
+    </table>
+
+
 </div>
 
 

@@ -1,16 +1,20 @@
 package com.example.week.implement;
 
 import com.example.week.models.Role;
-import com.example.week.resources.RoleRepository;
+import com.example.week.repositories.RoleRepository;
 import com.example.week.services.RoleService;
-import jakarta.inject.Inject;
 
 import java.util.List;
+import java.util.Optional;
 
 public class RoleImplement implements RoleService {
-//    @Inject
+    //    @Inject
 //    private RoleRepository repository;
-private RoleRepository repository= new RoleRepository();
+    private RoleRepository repository;
+
+    public RoleImplement() {
+        repository = new RoleRepository();
+    }
 
     @Override
     public List<Role> getAll() {
@@ -18,7 +22,7 @@ private RoleRepository repository= new RoleRepository();
     }
 
     @Override
-    public Role findById(String id) {
+    public Optional<Role> findById(String id) {
         return repository.find(id);
     }
 
@@ -32,9 +36,14 @@ private RoleRepository repository= new RoleRepository();
         return repository.updateRole(a);
     }
 
+
     @Override
-    public void delete(String id) {
-        Role a = repository.find(id);
-        repository.deleteRole(a);
+    public List<Role> findByAccId(String id) {
+        return repository.findByAccId(id);
+    }
+
+    @Override
+    public Role findByRoleName(String name) {
+        return repository.findByRoleName(name);
     }
 }

@@ -1,16 +1,17 @@
 package com.example.week.enums;
 
 public enum RoleStatus {
-    ACTIVE(1),
     DEACTIVE(0),
+    ACTIVE(1),
+
     DELETED(-1);
-    private int status;
+    private int s;
 
     RoleStatus(int status) {
-        this.status = status;
+        this.s = status;
     }
 
-    public int getStatus() {
-        return status;
+    public int getS() {
+        return s;
     }
 }

@@ -4,6 +4,12 @@ import com.example.week.enums.AccountStatus;
 import jakarta.persistence.*;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Account.getAll",query = "select a from Account a where a.status=:status"),
+        @NamedQuery(name = "Account.findById",query = "select  a from Account a where a.account_id=:id"),
+        @NamedQuery(name = "Account.findByRoleNotAdmin", query = "SELECT a FROM Account a JOIN GrantAccess g ON a.account_id = g.account.account_id WHERE a.status=1 and (g.role.role_name = :role AND g.grantStatus = 0) or a.account_id NOT IN (SELECT a1.account_id FROM Account a1 JOIN GrantAccess g ON a1.account_id = g.account.account_id WHERE g.role.role_name = :role AND g.grantStatus = 1)")
+
+})
 public class Account {
     @Id
     private String account_id;
@@ -11,7 +17,6 @@ public class Account {
     private String password;
     private String email;
     private String phone;
-    @Column(columnDefinition = "tinyint(4)")
     @Enumerated(EnumType.ORDINAL)
     private AccountStatus status;
 

@@ -1,16 +1,19 @@
 package com.example.week.implement;
 
 import com.example.week.models.Log;
-import com.example.week.resources.LogRepository;
+import com.example.week.repositories.LogRepository;
 import com.example.week.services.LogService;
-import jakarta.inject.Inject;
 
 import java.util.List;
 
 public class LogImplement implements LogService {
 //    @Inject
 //    private LogRepository repository;
-    private LogRepository repository= new LogRepository();
+    private LogRepository repository;
+
+    public LogImplement() {
+        repository= new LogRepository();
+    }
 
     @Override
     public boolean createLog(Log log) {

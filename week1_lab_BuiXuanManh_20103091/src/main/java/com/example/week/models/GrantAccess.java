@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Grant_access")
+@NamedQueries({
+        @NamedQuery(name = "GrantAccess.findByAR",query = "select g from  GrantAccess g where g.account.account_id=:id and g.role.role_name=:name")
+})
 public class GrantAccess {
     @Id
     @ManyToOne
@@ -48,11 +51,9 @@ public class GrantAccess {
         this.note = note;
         this.grantStatus = grantStatus;
     }
-
     public GrantStatus getGrantStatus() {
         return grantStatus;
     }
-
     public void setGrantStatus(GrantStatus grantStatus) {
         this.grantStatus = grantStatus;
     }

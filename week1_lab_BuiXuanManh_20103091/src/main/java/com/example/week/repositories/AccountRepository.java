@@ -1,11 +1,14 @@
-package com.example.week.resources;
+package com.example.week.repositories;
 
+import com.example.week.enums.AccountStatus;
 import com.example.week.models.Account;
 import com.example.week.models.Role;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
+import java.util.Optional;
+
 public class AccountRepository {
     private EntityManager em;
     private EntityTransaction tr;
@@ -39,15 +42,19 @@ public class AccountRepository {
         return false;
     }
     public List<Account> getAll(){
-        List<Account> l = em.createQuery("select a from Account a").getResultList();
+        List<Account> l = em.createNamedQuery("Account.getAll", Account.class).setParameter("status", AccountStatus.ACTIVE).getResultList();
         return l;
     }
-    public Account find(String id){
-        Account aa = (Account) em.createQuery("select a from Account a where a.account_id="+id).getSingleResult();
-        return aa;
+    public Optional<Account> find(String id){
+        return Optional.ofNullable(em.createNamedQuery("Account.findById", Account.class).setParameter("id",id).getSingleResult());
+
     }
     public List<Account> findAcByRole(){
         List<Account> l= em.createQuery("select a from Account a join GrantAccess g on a.account_id=g.account.account_id group by a having Count(g.role.role_id) = 1").getResultList();
+        return l;
+    }
+    public List<Account> findByNotAdmin(String name){
+        List<Account> l= em.createNamedQuery("Account.findByRoleNotAdmin", Account.class).setParameter("role",name).getResultList();
         return l;
     }
     public Role findRole(String username){

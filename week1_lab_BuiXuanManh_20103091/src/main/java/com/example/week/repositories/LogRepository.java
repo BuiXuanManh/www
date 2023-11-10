@@ -1,16 +1,18 @@
-package com.example.week.resources;
+package com.example.week.repositories;
 
-import com.example.week.models.GrantAccess;
+import com.example.week.models.Log;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
-public class GrantAccessRepository {
+import java.util.List;
+
+public class LogRepository {
     private EntityManager em;
     private EntityTransaction tr;
-    public GrantAccessRepository() {
+    public LogRepository(){
         em=Connection.getInstance().getEmf().createEntityManager();
     }
-    public boolean grantAccess(GrantAccess a){
+    public boolean createLog(Log a){
         tr = em.getTransaction();
         tr.begin();
         try {
@@ -23,4 +25,9 @@ public class GrantAccessRepository {
         }
         return false;
     }
+    public List<Log> findLogByA(String u){
+        List<Log> l = em.createNamedQuery("Log.findByAccId", Log.class).setParameter("id",u).getResultList();
+        return l;
+    }
+    
 }

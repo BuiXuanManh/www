@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
         @NamedQuery(name = "ProductPrice.finById",query = "SELECT e FROM ProductPrice e where e.priceDatetime=:id")
 })
 public class ProductPrice {
+    @Id
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;

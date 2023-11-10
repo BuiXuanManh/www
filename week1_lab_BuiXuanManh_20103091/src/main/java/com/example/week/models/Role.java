@@ -2,12 +2,13 @@ package com.example.week.models;
 
 import com.example.week.enums.AccountStatus;
 import com.example.week.enums.RoleStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Role.findByAccId",query = "select r from Role r join GrantAccess g on r.id=g.role.id where g.grantStatus=1 and  g.account.id =:id"),
+        @NamedQuery(name = "Role.findByRoleName",query = "select r from Role r where r.role_name=:name")
+})
 public class Role {
     @Id
     private String role_id;

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.example.week.models.Account" %><%--
   Created by IntelliJ IDEA.
   User: bmanh
   Date: 9/13/2023
@@ -9,20 +9,38 @@
 <html>
 <head>
     <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <%
+    Account acc= (Account) request.getAttribute("acc");
+  %>
 </head>
 <body>
-<form action="ControlServlet" method="post">
-  <h2>Cập Nhật Tài Khoản</h2>
-  <label for="updateUsername">Tên Đăng Nhập:</label>
-  <input type="text" id="updateUsername" name="updateUsername" required><br>
-  <label for="newPassword">Mật Khẩu:</label>
-  <input type="password" id="Password" name="Password" required><br>
-  <label for="Password">Mật Khẩu Mới:</label>
-  <input type="password" id="newPassword" name="newPassword" required><br>
-  <!-- Thêm các trường khác cho cập nhật thông tin tài khoản -->
+<div class="container">
+  <div class="row">
+    <h2>Update</h2>
+  </div>
+  <form action=<%="ControlServlet?action=update&&id="+acc.getAccount_id()%> method="post">
+    <div class="form-group">
+      <label for="Password">Password:</label>
+      <input class="form-control" type="password" id="Password" name="password" value=<%=acc.getPassword()%> required><br>
+    </div>
+    <div class="form-group">
+      <label>Email:</label>
+      <input class="form-control" type="text" name="email" value=<%=acc.getEmail()%> required><br>
+    </div>
+    <div class="form-group">
+      <label>Phone:</label>
+      <input class="form-control" type="text" name="phone" value=<%=acc.getPhone()%> required><br>
+    </div>
+    <div class="form-group">
+      <label>Full name:</label>
+      <input class="form-control" type="text" name="fullName" value=<%=acc.getFull_name()%> required><br>
+    </div>
+    <button class="btn btn-primary" type="submit">Cập Nhật Tài Khoản</button>
+  </form>
+</div>
 
-  <input type="hidden" name="action" value="updateAccount">
-  <button type="submit">Cập Nhật Tài Khoản</button>
-</form>
 </body>
 </html>

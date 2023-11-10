@@ -26,4 +26,12 @@ public class Address {
     private String street;
     @Column(columnDefinition = "varchar(20)")
     private String number;
+
+    public Address(String city, CountryCode countryCode, String zipcode, String street, String number) {
+        this.city = city;
+        this.countryCode = countryCode;
+        this.zipcode = zipcode;
+        this.street = street;
+        this.number = number;
+    }
 }

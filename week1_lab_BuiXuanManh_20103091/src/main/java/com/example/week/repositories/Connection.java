@@ -1,4 +1,4 @@
-package com.example.week.resources;
+package com.example.week.repositories;
 
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;

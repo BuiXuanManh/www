@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.example.week.models.Log" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: bmanh
   Date: 9/13/2023
@@ -9,16 +10,44 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form action="ControlServlet" method="post">
-    <h2>Ghi Log Đăng Nhập/Đăng Xuất</h2>
-    <label for="logUsername">Tên Đăng Nhập:</label>
-    <input type="text" id="logUsername" name="logUsername" required><br>
-    <h4 name="username"><%=request.getAttribute("Log") %></h4>
-    <input type="hidden" name="action" value="logLoginLogout">
-    <button type="submit">Ghi Log</button>
-</form>
+<div class="container">
+    <div class="row">
+        <h1>Log page</h1>
+    </div>
+    <table class="table table-tripped table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Note</th>
+            <th>Login Date</th>
+            <th>Logout Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%
+            if (request.getAttribute("listLog") != null) {
+                List<Log> l = (List<Log>) request.getAttribute("listLog");
+        %>
+        <%
+            for (Log a : l) {
+        %>
+        <tr>
+            <th><%=a.getNote()%>
+            </th>
+            <th><%=a.getLoginDate()%>
+            </th>
+            <th><%=a.getLogoutDate()%>
+            </th>
+        </tr>
+        <%}%>
+        <%}%>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

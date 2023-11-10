@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Log.findByAccId",query = "select l from Log l where l.account.account_id=:id ")
+})
 public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

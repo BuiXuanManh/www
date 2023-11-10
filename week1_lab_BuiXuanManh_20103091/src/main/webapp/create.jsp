@@ -11,7 +11,7 @@
 <body>
 <div class="container mt-5">
   <h2 class="text-center">Thêm Tài Khoản</h2>
-  <form action="ControlServlet" method="post">
+  <form action="ControlServlet?action=addAcc" method="post">
     <div class="form-group">
       <label for="newUsername">Tên Đăng Nhập *:</label>
       <input type="text" class="form-control" id="newUsername" name="newUsername" required>
@@ -32,7 +32,6 @@
       <label for="phone">Phone *:</label>
       <input type="text" class="form-control" id="phone" name="phone" required>
     </div>
-    <input type="hidden" name="action" value="addAccount">
     <button type="submit" class="btn btn-primary">Register</button>
   </form>
 </div>
