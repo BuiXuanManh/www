@@ -243,6 +243,9 @@ public class ControlServlet extends HttpServlet {
                             req.getRequestDispatcher("grant.jsp").forward(req, resp);
                         } else if (g2.isPresent()) {
                             logger.info("Grant 0:");
+                            GrantAccess gg = g2.get();
+                            gg.setGrantStatus(GrantStatus.ENABLED);
+                            gService.grantAccess(gg);
                             req.getRequestDispatcher("grant.jsp").forward(req, resp);
                         } else {
                             logger.info("Grant 2: " + grantAccess2);
