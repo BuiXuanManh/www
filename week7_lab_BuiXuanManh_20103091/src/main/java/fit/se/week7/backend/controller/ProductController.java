@@ -29,6 +29,10 @@ public class ProductController {
     private ProductPriceService productPriceService;
     private int PAGE;
     private int SIZE;
+    @GetMapping("/cart")
+    public String cartForm(Model model){
+        return "shoping-cart";
+    }
     @GetMapping
     private String formProduct(Model model, @RequestParam(name = "userName", required = false) String userName){
         model.addAttribute("products",service.getProduct());
@@ -37,7 +41,7 @@ public class ProductController {
     }
 
     @GetMapping("/sort")
-    public String getAllBySort(Model model,@RequestParam(name = "userName", required = false) String userName, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size, RedirectAttributes redirectAttributes){
+    public String getAllBySort(Model model,@RequestParam(name = "userName", required = false) String userName, @RequestParam(value = "page", required = false) Optional<Integer> page, @RequestParam(value = "size", required = false) Optional<Integer> size, RedirectAttributes redirectAttributes){
         int currentPage= page.orElse(1);
         int currentSize=size.orElse(10);
         Page<ProductDto> p = service.findPage(currentPage - 1, currentSize, "name", "asc");
@@ -52,20 +56,20 @@ public class ProductController {
         }
         return "index";
     }
-    @GetMapping("/insert")
-    public String insertForm(Model model){
-        model.addAttribute("product",new Product());
-        model.addAttribute("statuses", ProductStatus.values());
-        return "/shopping/insertPro";
-    }
-    @PostMapping("/insertNew")
-    public String insert(@ModelAttribute("product") Product product){
-        if(product!=null){
-            service.save(product);
-            return "redirect:/product/sort";
-        }
-        return "redirect:/product/insert";
-    }
+//    @GetMapping("/insert")
+//    public String insertForm(Model model){
+//        model.addAttribute("product",new Product());
+//        model.addAttribute("statuses", ProductStatus.values());
+//        return "/shopping/insertPro";
+//    }
+//    @PostMapping("/insertNew")
+//    public String insert(@ModelAttribute("product") Product product){
+//        if(product!=null){
+//            service.save(product);
+//            return "redirect:/product/sort";
+//        }
+//        return "redirect:/product/insert";
+//    }
 
 
 }
