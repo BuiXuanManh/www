@@ -43,12 +43,12 @@ public class UserController {
         Optional<User> e = service.findByEmail(user.getUserName());
         if (f.isPresent()) {
             if (f.get().getPassWord().equalsIgnoreCase(user.getPassWord())) {
-                return "redirect:/product/sort?userName=" + user.getUserName();
+                return "redirect:/product/index?userName=" + user.getUserName();
             }
         }
         if (e.isPresent()) {
             if (e.get().getPassWord().equalsIgnoreCase(user.getPassWord())) {
-                return "redirect:/product/sort?userName=" + user.getUserName();
+                return "redirect:/product/index?userName=" + user.getUserName();
             }
         }
         return null;

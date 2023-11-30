@@ -14,5 +14,7 @@ public interface ProductService {
     Optional<Product> findById(long id);
     Product save(Product product);
     Page<ProductDto> findPage(int pageNo, int pageSize, String sortBy, String sortDerection);
+    List<ProductDto> getProduct(String userName);
     List<ProductDto> getProduct();
+    Optional<ProductDto> findByProdId(Long id);
 }

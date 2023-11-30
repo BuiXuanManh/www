@@ -29,13 +29,6 @@
             <div class="humberger__menu__logo">
                 <a th:href="@{/product}"><img th:src="@{/img/logo.png}" alt=""></a>
             </div>
-            <div class="humberger__menu__cart">
-                <ul>
-                    <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                    <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                </ul>
-                <div class="header__cart__price">item: <span>$150.00</span></div>
-            </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
@@ -117,13 +110,16 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a th:href="index"><img th:src="@{/img/logo.png}" alt=""></a>
+                    <a th:if="${n != null and n != ''}" th:href="@{/product/index(userName=${n})}"><img th:src="@{/img/logo.png}" alt=""></a>
+                    <a th:if="${n == null or n == ''}" th:href="index"><img th:src="@{/img/logo.png}" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="./index.html">Home</a></li>
+                        <li class="active"><a th:if="${n != null and n != ''}" th:href="@{/product/index(userName=${n})}">Home</a>
+                            <a th:if="${n == null or n == ''}" th:href="@{/product/index}">Home</a>
+                        </li>
                         <li><a href="./shop-grid.html">Shop</a></li>
                         <li><a href="#">Pages</a>
                             <ul class="header__menu__dropdown">
@@ -141,8 +137,10 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <li><a th:if="${n == null or n == ''}" th:href="@{/error/notLogin}"><i
+                                class="fa fa-shopping-bag"></i> <span>0</span></a>
+                            <a th:if="${n != null and n != ''}" th:href="@{/product/cart(userName=${n})}"><i
+                                    class="fa fa-shopping-bag"></i> <span th:text="${cartSize}"></span></a></li>
                     </ul>
                     <div class="header__cart__price">item: <span>$150.00</span></div>
                 </div>
@@ -153,6 +151,7 @@
         </div>
     </div>
 </header>
+
 
 </body>
 <script th:src="@{/js/jquery-3.3.1.min.js}"></script>

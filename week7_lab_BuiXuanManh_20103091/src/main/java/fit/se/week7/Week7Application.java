@@ -30,7 +30,10 @@ public class Week7Application {
 //    @Bean
 //    CommandLineRunner init() {
 //        return args -> {
-//            int j=1;
+//            int pr=1;
+//            int prd=1;
+//            int cart=1;
+//            int thumb=1;
 //            for (int i = 0; i < 1000; i++) {
 //                Faker faker = new Faker();
 //                Product p = new Product();
@@ -43,12 +46,30 @@ public class Week7Application {
 //                Optional<Product> pf = service.findById(i+1);
 //                if(pf.isPresent()){
 //                    p = pf.get();
-//                    ProductImage image = new ProductImage(j + "", (i + 1) + "", p);
-//                    if(j==12){
-//                        j=0;
+//                    ProductImage image = new ProductImage(pr + "", "product", p);
+//                    ProductImage image2 = new ProductImage(prd + "", "product-details", p);
+//                    ProductImage image3 = new ProductImage(cart + "", "cart", p);
+//                    ProductImage image4 = new ProductImage(thumb + "", "thumb", p);
+//                    if(pr==12){
+//                        pr=0;
 //                    }
-//                    j=j+1;
+//                    if(prd==5){
+//                        prd=0;
+//                    }
+//                    if(cart==3){
+//                        cart=0;
+//                    }
+//                    if(thumb==4){
+//                        thumb=0;
+//                    }
+//                    thumb++;
+//                    cart++;
+//                    prd++;
+//                    pr=pr+1;
 //                    productImageService.save(image);
+//                    productImageService.save(image2);
+//                    productImageService.save(image3);
+//                    productImageService.save(image4);
 //                    LocalDateTime currentTime = LocalDateTime.now().plusHours(i);
 //                    ProductPrice price = new ProductPrice();
 //                    price.setProduct(p);

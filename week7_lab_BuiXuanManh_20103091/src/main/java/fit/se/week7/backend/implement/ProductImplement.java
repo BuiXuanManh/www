@@ -36,8 +36,18 @@ public class ProductImplement implements ProductService {
     }
 
     @Override
+    public List<ProductDto> getProduct(String userName) {
+        return repository.getProduct(userName);
+    }
+
+    @Override
     public List<ProductDto> getProduct() {
         return repository.getProduct();
+    }
+
+    @Override
+    public Optional<ProductDto> findByProdId(Long id) {
+        return repository.findByProdId(id);
     }
 
     @Override
