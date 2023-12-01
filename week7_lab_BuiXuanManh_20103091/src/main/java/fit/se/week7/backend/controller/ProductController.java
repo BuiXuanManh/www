@@ -1,6 +1,9 @@
 package fit.se.week7.backend.controller;
 
+import fit.se.week7.backend.dto.CheckoutDto;
+import fit.se.week7.backend.dto.CheckoutForm;
 import fit.se.week7.backend.dto.ProductDto;
+import fit.se.week7.backend.dto.SignupDto;
 import fit.se.week7.backend.models.Cart;
 import fit.se.week7.backend.models.Product;
 import fit.se.week7.backend.models.User;
@@ -17,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,9 +40,24 @@ public class ProductController {
     private UserService userService;
     private int PAGE;
     private int SIZE;
+    @PostMapping(value = "/check", consumes = "application/x-www-form-urlencoded")
+    public String check(@ModelAttribute("checkoutForm")CheckoutForm checkoutForm){
+        List<CheckoutDto> products = checkoutForm.getProducts();
+        return "redirect:/product/index";
+    }
+
     @GetMapping("/checkout")
-    public String checkoutForm(Model model){
+    public String checkoutForm(Model model,@RequestParam(name = "userName", required = false) String userName){
+        SignupDto dto = new SignupDto();
+        model.addAttribute("dto",dto);
+        getCartItem(model,userName);
         return "checkout";
+    }
+    public void getCartItem(Model model,String userName){
+        List<ProductDto> l = service.getProduct(userName);
+        model.addAttribute("productsCart",l);
+        model.addAttribute("n", userName);
+        model.addAttribute("cartSize",l==null?0:l.size());
     }
     @GetMapping("/shop-details/{prod_id}")
     public String shopDetails( @PathVariable Long prod_id, Model model,@RequestParam(name = "userName", required = false) String userName){
@@ -47,10 +66,8 @@ public class ProductController {
         if(p.isEmpty()){
             return "errorLogin";
         }
-        List<ProductDto> l = service.getProduct(userName);
-        model.addAttribute("productsCart",l);
-        model.addAttribute("n", userName);
-        model.addAttribute("cartSize",l==null?0:l.size());
+        getCartItem(model, userName);
+
         model.addAttribute("productDetail",p.get());
         return "shop-details";
     }
@@ -61,10 +78,8 @@ public class ProductController {
             model.addAttribute("isLogin","you not login");
         }
         else {
-            List<ProductDto> l = service.getProduct(userName);
-            model.addAttribute("productsCart",l);
-            model.addAttribute("n", userName);
-            model.addAttribute("cartSize",l==null?0:l.size());
+            getCartItem(model, userName);
+            model.addAttribute("checkoutForm", new CheckoutForm());
         }
         return "shoping-cart";
     }
@@ -78,6 +93,7 @@ public class ProductController {
         CartKey key = new CartKey(p.get(),u.get());
         Cart c= new Cart(key);
         cartService.save(c);
+
         return "redirect:/product/index?userName="+userName;
     }
     @GetMapping
@@ -93,12 +109,7 @@ public class ProductController {
         int currentSize=size.orElse(10);
         Page<ProductDto> p = service.findPage(currentPage - 1, currentSize, "name", "asc");
         model.addAttribute("pageProduct",p);
-        model.addAttribute("n",userName);
-        List<ProductDto> l = service.getProduct(userName);
-        System.out.println(l);
-        model.addAttribute("productsCart",l);
-        model.addAttribute("cartSize",l==null?0:l.size());
-        model.addAttribute("error", "code is not existed");
+        getCartItem(model, userName);
         int totalPage= p.getTotalPages();
         if(totalPage>0){
             List<Integer> pageNumbers= IntStream.rangeClosed(1,totalPage).boxed().collect(Collectors.toList());
@@ -108,20 +119,4 @@ public class ProductController {
         }
         return "index";
     }
-//    @GetMapping("/insert")
-//    public String insertForm(Model model){
-//        model.addAttribute("product",new Product());
-//        model.addAttribute("statuses", ProductStatus.values());
-//        return "/shopping/insertPro";
-//    }
-//    @PostMapping("/insertNew")
-//    public String insert(@ModelAttribute("product") Product product){
-//        if(product!=null){
-//            service.save(product);
-//            return "redirect:/product/sort";
-//        }
-//        return "redirect:/product/insert";
-//    }
-
-
 }
