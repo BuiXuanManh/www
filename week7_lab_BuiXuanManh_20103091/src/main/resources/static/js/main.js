@@ -202,11 +202,11 @@
     /*-------------------
 		Quantity change
 	--------------------- */
+
     var finalTotal = 0;
 
     function updateTotal($row) {
         var quantity = parseFloat($row.find('.pro-qty input').val());
-        console.log(quantity);
 
         var price = parseFloat($row.find('.shoping__cart__price span').text());
         var total = quantity * price;
@@ -216,14 +216,48 @@
         updateFinalTotal(); // Gọi hàm cập nhật tổng giá trị cuối cùng
     }
 
-    function updateFinalTotal() {
-        $('#finalTotal span').text('$' + finalTotal.toFixed(2));
+    function updateDecTotal($row) {
+        var quantity = parseFloat($row.find('.pro-qty input').val());
+
+        var price = parseFloat($row.find('.shoping__cart__price span').text());
+        var total = quantity * price;
+        finalTotal -= total;
+
+        $row.find('.shoping__cart__total').text('$' + total.toFixed(2));
+        updateFinalTotal(); // Gọi hàm cập nhật tổng giá trị cuối cùng
     }
+
+    function updateFinalTotal() {
+        var total = 0;
+        $('.shoping__cart__total').each(function () {
+            var value = parseFloat($(this).text().replace('$', ''));
+            if (!isNaN(value)) {
+                total += value;
+            }
+        });
+        $('#finalTotal span').text('$' + total.toFixed(2));
+    }
+
+
+    $('.cart-item').each(function () {
+        var $row = $(this);
+        var quantity = parseFloat($row.find('.pro-qty input').val());
+
+        var price = parseFloat($row.find('.shoping__cart__price span').text());
+        var total = quantity * price;
+        finalTotal += total;
+
+        $row.find('.shoping__cart__total').text('$' + total.toFixed(2));
+        $row.find('.shoping__cart__total-per-item').text('$' + price.toFixed(2)); // Thêm dòng này để cập nhật giá trị của từng total
+    });
+
+    updateFinalTotal(); // Gọi hàm cập nhật tổng giá trị cuối cùng
+
     var proQty = $('.pro-qty');
     proQty.prepend('<span class="dec qtybtn">-</span>');
     proQty.append('<span class="inc qtybtn">+</span>');
 
-    // Lắng nghe sự kiện khi giá trị thay đổi
+// Lắng nghe sự kiện khi giá trị thay đổi
     proQty.on('click', '.qtybtn', function () {
         var $button = $(this);
         var $row = $button.closest('.cart-item');
@@ -231,29 +265,54 @@
         var oldValue = $button.parent().find('input').val();
         if ($button.hasClass('inc')) {
             var newVal = parseFloat(oldValue) + 1;
+            $button.parent().find('input').val(newVal);
+            updateTotal($row);
         } else {
             // Don't allow decrementing below zero
             if (oldValue > 0) {
                 var newVal = parseFloat(oldValue) - 1;
+                $button.parent().find('input').val(newVal);
+                updateDecTotal($row);
             } else {
                 newVal = 0;
             }
         }
-        $button.parent().find('input').val(newVal);
+    });
+    proQty.on('change', 'input', function () {
+        var $input = $(this);
+        if ($input.val() === '') {
+            // alert('number');
+            $input.val($input.data('old-value'));
+        }
+        var $row = $input.closest('.cart-item');
 
-        updateTotal($row);
+        var oldValue = $input.data('old-value');
+        var newValue = parseFloat($input.val());
+        if (isNaN(newValue)) {
+            newValue = 0;
+        }
+        if (isNaN(oldValue)) {
+            newValue = 0;
+        }
+
+        var delta = newValue - oldValue;
+        var quantity = parseFloat($row.find('.pro-qty input').val());
+        var price = parseFloat($row.find('.shoping__cart__price span').text());
+        var total = quantity * price;
+        var deltaTotal = delta * price;
+        finalTotal += deltaTotal;
+
+        $row.find('.shoping__cart__total').text('$' + total.toFixed(2));
+        $row.find('.shoping__cart__total-per-item').text('$' + price.toFixed(2)); // Thêm dòng này để cập nhật giá trị của từng total
+        updateFinalTotal(); // Gọi hàm cập nhật tổng giá trị cuối cùng
+
+        $input.data('old-value', newValue);
+    });
+    $('.pro-qty input').on('input', function() {
+        $(this).trigger('change');
     });
 
-    // Lắng nghe sự kiện khi giá trị thay đổi
-    $('.item_quantity').on('change', function () {
-        var $row = $(this).closest('.cart-item');
-        updateTotal($row);
-    });
 
-    // Gọi hàm cập nhật tổng giá trị cho mỗi hàng khi trang được tải
-    $('.cart-item').each(function () {
-        var $row = $(this);
-        updateTotal($row);
-    });
+
 
 })(jQuery);

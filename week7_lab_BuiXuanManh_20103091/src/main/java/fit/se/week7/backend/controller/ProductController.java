@@ -36,6 +36,10 @@ public class ProductController {
     private UserService userService;
     private int PAGE;
     private int SIZE;
+    @GetMapping("/checkout")
+    public String checkoutForm(Model model){
+        return "checkout";
+    }
     @GetMapping("/shop-details/{prod_id}")
     public String shopDetails( @PathVariable Long prod_id, Model model,@RequestParam(name = "userName", required = false) String userName){
         Optional<ProductDto> p = service.findByProdId(prod_id);
