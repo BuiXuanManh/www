@@ -1,9 +1,6 @@
 package fit.se.week7.backend.dto;
 
-import fit.se.week7.backend.enums.UserRole;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import fit.se.week7.backend.enums.TypePayment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +17,5 @@ public class SignupDto {
     private String phone;
     private String address;
     private String note;
+    private TypePayment typePayment;
 }

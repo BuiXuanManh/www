@@ -108,7 +108,15 @@
             </div>
             <div class="checkout__form">
                 <h4>Billing Details</h4>
-                <form action="#">
+                <form th:action="@{/product/payment(userName=${n})}" method="post">
+                    <div class="row" th:object="${emp}">
+                        <div class="col-lg-8 col-md-6">
+                            <div class="checkout__input">
+                                <p>Employee ID<span>*</span></p>
+                                <input name="id" th:field="*{id}" type="number" required>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row" th:object="${dto}">
                         <div class="col-lg-8 col-md-6">
                             <div class="checkout__input">
@@ -147,25 +155,24 @@
                             <div class="checkout__order">
                                 <h4>Your Order</h4>
                                 <div class="checkout__order__products">Products <span>Total</span></div>
-                                <ul>
-                                    <li>Vegetable’s Package <span>$75.99</span></li>
-                                    <li>Fresh Vegetable <span>$151.99</span></li>
-                                    <li>Organic Bananas <span>$53.99</span></li>
+                                <ul th:each="product: ${products}">
+                                    <li class="d-flex justify-content-between">
+                                        <p th:text="${product.getName()}"></p>
+                                        <p th:text="${'$'+product.getTotal()}" class="font-weight-bold"></p>
+
+                                    </li>
                                 </ul>
-                                <div class="checkout__order__total">Total <span>$750.99</span></div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="payment">
-                                        Check Payment
-                                        <input type="checkbox" id="payment">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="paypal">
-                                        Paypal
-                                        <input type="checkbox" id="paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
+                                <div class="checkout__order__total">Total <span th:text="${'$'+finalTotal}"></span></div>
+                                <div class="row">
+                                    <div class="col-md-7 justify-content-center align-items-center mt-2">
+                                        <label>Payment Type</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <select th:field="*{typePayment}" name="typePayment" class="font-weight-bold ml-1">
+                                            <option selected value="CAST">Cast</option>
+                                            <option value="PAYPAL">Paypal</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <button type="submit" class="site-btn">PLACE ORDER</button>
                             </div>

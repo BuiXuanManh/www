@@ -1,6 +1,6 @@
 package fit.se.week7.backend.enums;
 
-public enum UserRole {
+public enum RoleName {
     USER,
     ADMIN
 }

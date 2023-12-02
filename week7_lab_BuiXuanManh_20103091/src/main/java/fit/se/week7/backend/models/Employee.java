@@ -23,7 +23,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "emp_id")
     private long id;
-    @Column(name = "full_name", length = 150, nullable = false)
+    @Column(name = "full_name", length = 150, nullable = true)
     private String fullname;
     @Column(name = "dob", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -31,11 +31,11 @@ public class Employee {
     private LocalDate dob;
     @Column(name = "email", unique = true, length = 150)
     private String email;
-    @Column(name = "phone", length = 15, nullable = false)
+    @Column(name = "phone", length = 15, nullable = true)
     private String phone;
-    @Column(name = "address", length = 250, nullable = false)
+    @Column(name = "address", length = 250, nullable = true)
     private String address;
-    @Column(name = "status", nullable = false)
+    @Column(name = "status", nullable = true)
     @Enumerated(EnumType.ORDINAL)
     private EmployeeStatus status;
 

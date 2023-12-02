@@ -1,12 +1,17 @@
 package fit.se.week7.backend.controller;
 
 import fit.se.week7.backend.dto.SignupDto;
-import fit.se.week7.backend.enums.UserRole;
+import fit.se.week7.backend.enums.RoleName;
+import fit.se.week7.backend.enums.UserRoleStatus;
 import fit.se.week7.backend.models.Customer;
+import fit.se.week7.backend.models.Role;
 import fit.se.week7.backend.models.User;
+import fit.se.week7.backend.models.UserRole;
+import fit.se.week7.backend.pks.UserRolePK;
 import fit.se.week7.backend.services.CustomerService;
+import fit.se.week7.backend.services.RoleService;
+import fit.se.week7.backend.services.UserRoleService;
 import fit.se.week7.backend.services.UserService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,7 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -29,6 +33,10 @@ public class UserController {
     private CustomerService customerService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserRoleService userRoleService;
+    @Autowired
+    private RoleService roleService;
 
     @GetMapping
     public String logForm(Model model) {
@@ -66,7 +74,11 @@ public class UserController {
         if (f.isPresent() || e.isPresent() || !dto.getPassWord().equalsIgnoreCase(dto.getConfirmPassWord())) {
             return "errorLogin";
         }
-        User u = new User(dto.getUserName(), dto.getPassWord(), dto.getEmail(), UserRole.USER);
+        User u = new User(dto.getUserName(), dto.getPassWord(), dto.getEmail());
+        Optional<Role> r = roleService.findByRoleName(RoleName.USER);
+        UserRolePK pk= new UserRolePK(u,r.get());
+        UserRole userRole= new UserRole(pk, UserRoleStatus.ACTIVE);
+        userRoleService.save(userRole);
         Customer c = new Customer(dto.getName(), dto.getEmail(), dto.getPhone(), dto.getAddress());
         Optional<Customer> cus = customerService.findByEmail(dto.getEmail());
         if (cus.isPresent()) {

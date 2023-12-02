@@ -1,21 +1,20 @@
 package fit.se.week7.backend.models;
 
-import fit.se.week7.backend.enums.CartStatus;
-import fit.se.week7.backend.pks.CartKey;
+import fit.se.week7.backend.enums.UserRoleStatus;
+import fit.se.week7.backend.pks.UserRolePK;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Entity
+@Table(name = "user_role")
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "carts")
-public class Cart {
+public class UserRole {
     @Id
-    @Enumerated
-    private CartKey id;
+    private UserRolePK userRolePK;
     @Enumerated(EnumType.STRING)
-    private CartStatus status;
+    private UserRoleStatus status;
 }

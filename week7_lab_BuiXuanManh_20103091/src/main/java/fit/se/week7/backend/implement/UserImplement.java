@@ -1,5 +1,6 @@
 package fit.se.week7.backend.implement;
 
+import fit.se.week7.backend.enums.UserRoleStatus;
 import fit.se.week7.backend.models.User;
 import fit.se.week7.backend.repositories.UserRepository;
 import fit.se.week7.backend.services.UserService;
@@ -15,12 +16,12 @@ public class UserImplement implements UserService {
     private UserRepository repository;
     @Override
     public Optional<User> findByUserName(String username) {
-        return repository.findById(username);
+        return repository.findById(username,UserRoleStatus.ACTIVE);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return repository.findByEmail(email);
+        return repository.findByEmail(email, UserRoleStatus.ACTIVE);
     }
 
     @Override

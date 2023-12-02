@@ -177,7 +177,7 @@
             maxamount.val('$' + ui.values[1]);
         }
     });
-    minamount.val('$' + rangeSlider.slider("values", 0));
+    minamount.val('$' + rangeSlider.slider("values", 1));
     maxamount.val('$' + rangeSlider.slider("values", 1));
 
     /*--------------------------
@@ -269,12 +269,12 @@
             updateTotal($row);
         } else {
             // Don't allow decrementing below zero
-            if (oldValue > 0) {
+            if (oldValue > 1) {
                 var newVal = parseFloat(oldValue) - 1;
                 $button.parent().find('input').val(newVal);
                 updateDecTotal($row);
             } else {
-                newVal = 0;
+                newVal = 1;
             }
         }
     });
@@ -289,10 +289,10 @@
         var oldValue = $input.data('old-value');
         var newValue = parseFloat($input.val());
         if (isNaN(newValue)) {
-            newValue = 0;
+            newValue = 1;
         }
         if (isNaN(oldValue)) {
-            newValue = 0;
+            newValue = 1;
         }
 
         var delta = newValue - oldValue;

@@ -6,17 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Collection;
-
 @Entity
-@Table(name = "users")
+@Table(name = "roles")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Role {
     @Id
-    private String userName;
-    private String passWord;
-    private String email;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Enumerated(EnumType.STRING)
+    private RoleName roleName;
 }

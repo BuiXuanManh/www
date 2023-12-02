@@ -1,6 +1,7 @@
 package fit.se.week7.backend.implement;
 
 import fit.se.week7.backend.dto.ProductDto;
+import fit.se.week7.backend.enums.CartStatus;
 import fit.se.week7.backend.models.Product;
 import fit.se.week7.backend.repositories.ProductRepository;
 import fit.se.week7.backend.services.ProductService;
@@ -37,7 +38,7 @@ public class ProductImplement implements ProductService {
 
     @Override
     public List<ProductDto> getProduct(String userName) {
-        return repository.getProduct(userName);
+        return repository.getProduct(userName, CartStatus.INCART);
     }
 
     @Override

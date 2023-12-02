@@ -4,14 +4,11 @@ import fit.se.week7.backend.dto.CheckoutDto;
 import fit.se.week7.backend.dto.CheckoutForm;
 import fit.se.week7.backend.dto.ProductDto;
 import fit.se.week7.backend.dto.SignupDto;
-import fit.se.week7.backend.models.Cart;
-import fit.se.week7.backend.models.Product;
-import fit.se.week7.backend.models.User;
+import fit.se.week7.backend.enums.CartStatus;
+import fit.se.week7.backend.models.*;
 import fit.se.week7.backend.pks.CartKey;
-import fit.se.week7.backend.services.CartService;
-import fit.se.week7.backend.services.ProductPriceService;
-import fit.se.week7.backend.services.ProductService;
-import fit.se.week7.backend.services.UserService;
+import fit.se.week7.backend.pks.OrderDetailPK;
+import fit.se.week7.backend.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -20,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.DecimalFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,25 +37,106 @@ public class ProductController {
     private CartService cartService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private EmployeeService employeeService;
+    @Autowired
+    private CustomerService customerService;
+    @Autowired
+    private OrderService orderService;
+    @Autowired
+    private OrderDetailsService orderDetailsService;
     private int PAGE;
     private int SIZE;
+    private List<CheckoutDto> list = new ArrayList();
     @PostMapping(value = "/check", consumes = "application/x-www-form-urlencoded")
-    public String check(@ModelAttribute("checkoutForm")CheckoutForm checkoutForm){
+    public String check(@ModelAttribute("checkoutForm") CheckoutForm checkoutForm,@RequestParam(name = "userName", required = false) String userName, Model model, RedirectAttributes attributes){
+        System.out.println(checkoutForm);
         List<CheckoutDto> products = checkoutForm.getProducts();
-        return "redirect:/product/index";
-    }
-
-    @GetMapping("/checkout")
-    public String checkoutForm(Model model,@RequestParam(name = "userName", required = false) String userName){
+        System.out.println(products);
+        DecimalFormat decimalFormat = new DecimalFormat("#.0");
+        double total=0;
+        for(CheckoutDto d : products) {
+            if (d.getQuantity() == 0) {
+                products.remove(d);
+            } else {
+                total += d.getTotal();
+            }
+        }
         SignupDto dto = new SignupDto();
+        Employee emp= new Employee();
         model.addAttribute("dto",dto);
+        model.addAttribute("emp",emp);
         getCartItem(model,userName);
+        CheckoutForm from = new CheckoutForm();
+        from.setProducts(products);
+        String formattedTotal = decimalFormat.format(total);
+        model.addAttribute("products", products);
+        model.addAttribute("finalTotal", formattedTotal);
+        model.addAttribute("checkoutForm", from);
+        attributes.addFlashAttribute("checkoutForm", from);
+        list= from.getProducts();
+//        redirectAttributes.addFlashAttribute("products",products);
+//        redirectAttributes.addFlashAttribute("finalTotal",total);
         return "checkout";
     }
+    @PostMapping(value = "/payment", consumes = "application/x-www-form-urlencoded")
+    public String payment(@RequestParam(name = "userName", required = false) String userName,@ModelAttribute("dto") SignupDto dto, @ModelAttribute("checkoutForm")CheckoutForm checkoutForm ,  @ModelAttribute("emp") Employee emp){
+        Optional<User> u = userService.findByUserName(userName);
+        Optional<Employee> e = employeeService.findById(emp.getId());
+        Optional<Customer> cus = customerService.findByEmail(dto.getEmail());
+        System.out.println(checkoutForm);
+        if(cus.isEmpty()||u.isEmpty()||!u.get().getPassWord().equalsIgnoreCase(dto.getPassWord())){
+            return "errorLogin";
+        }
+        DecimalFormat decimalFormat = new DecimalFormat("#.0");
+        if(e.isPresent()){
+
+            Order o = new Order(LocalDateTime.now(),e.get(),cus.get());
+            orderService.save(o);
+            checkoutForm.setProducts(list);
+            List<CheckoutDto> products = checkoutForm.getProducts();
+            double total=0;
+            for(CheckoutDto d : products){
+                Optional<Product> p= service.findById(d.getId());
+                if(p.isEmpty()){
+                    return "errorLogin";
+                }
+                if(d.getQuantity()==0){
+                    products.remove(dto);
+                }
+                else {
+                    total+=d.getTotal();
+                }
+                CartKey key = new CartKey(p.get(),u.get());
+                Optional<Cart> c = cartService.findById(key);
+                if(c.isEmpty()){
+                    return "errorLogin";
+                }
+                Cart c0 = c.get();
+                c0.setStatus(CartStatus.PURCHASED);
+                cartService.save(c0);
+                OrderDetailPK pk = new OrderDetailPK(o,p.get());
+                OrderDetail od = new OrderDetail(pk,d.getQuantity(),d.getPrice(),dto.getNote());
+                orderDetailsService.save(od);
+            }
+            String formattedTotal = decimalFormat.format(total);
+            System.out.println(formattedTotal);
+
+        }
+       return  "redirect:/product/index?userName="+userName;
+    }
+
     public void getCartItem(Model model,String userName){
         List<ProductDto> l = service.getProduct(userName);
         model.addAttribute("productsCart",l);
-        model.addAttribute("n", userName);
+        if(userName!=null){
+            model.addAttribute("n", userName);
+            Optional<User> u = userService.findByUserName(userName);
+            if(u.isPresent()){
+                model.addAttribute("admin",true);
+            }
+        }
+
         model.addAttribute("cartSize",l==null?0:l.size());
     }
     @GetMapping("/shop-details/{prod_id}")
@@ -91,7 +171,7 @@ public class ProductController {
             return "errorLogin";
         }
         CartKey key = new CartKey(p.get(),u.get());
-        Cart c= new Cart(key);
+        Cart c= new Cart(key, CartStatus.INCART);
         cartService.save(c);
 
         return "redirect:/product/index?userName="+userName;
@@ -101,6 +181,23 @@ public class ProductController {
         model.addAttribute("products",service.getProduct(userName));
         model.addAttribute("n",userName);
         return "index";
+    }
+    @GetMapping("/cart/delete/{user_id}/{prod_id}")
+    public String cartDelete(@PathVariable("user_id") String userName, @PathVariable Long prod_id){
+        Optional<User> u = userService.findByUserName(userName);
+        Optional<Product> p = service.findById(prod_id);
+        if(u.isEmpty()||p.isEmpty()){
+            return "errorLogin";
+        }
+        CartKey key = new CartKey(p.get(),u.get());
+        Optional<Cart> cart = cartService.findById(key);
+        if(cart.isEmpty()){
+            return "errorLogin";
+        }
+        Cart c= cart.get();
+        c.setStatus(CartStatus.DELETED);
+        cartService.save(c);
+        return "redirect:/product/cart?userName="+userName;
     }
 
     @GetMapping("/index")

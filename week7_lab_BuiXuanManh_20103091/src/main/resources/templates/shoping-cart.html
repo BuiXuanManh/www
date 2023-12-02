@@ -56,7 +56,6 @@
                         <form action="#">
                             <div class="hero__search__categories">
                                 All Categories
-                                <!--                                    <span class="arrow_carrot-down"></span>-->
                             </div>
                             <input type="text" placeholder="What do yo u need?">
                             <button type="submit" class="site-btn">SEARCH</button>
@@ -79,7 +78,7 @@
 <!-- Hero Section End -->
 
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+<section class="breadcrumb-section" th:style="'background-image: url(\'/img/breadcrumb.jpg\');'">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -99,7 +98,7 @@
 <!-- Shoping Cart Section Begin -->
 <section class="shoping-cart spad">
     <div class="container">
-        <form th:action="@{/product/check}" method="post">
+        <form th:action="@{/product/check(userName=${n})}" method="post">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__table">
@@ -125,21 +124,30 @@
                                         <input type="hidden" th:name="|products[${iterStat.index}].id|"
                                                th:value="${product.getId()}"/>
                                         $<span th:name="|products[${iterStat.index}].price|" th:text="${product.getPrice()}"></span>
+                                        <input type="hidden" th:name="|products[${iterStat.index}].price|"
+                                               th:value="${product.getPrice()}"/>
+                                        <input type="hidden" th:name="|products[${iterStat.index}].name|"
+                                               th:value="${product.getName()}"/>
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
                                                 <input class="item_quantity"
                                                        th:name="|products[${iterStat.index}].quantity|" type="number"
-                                                       th:value="${product.getQuantity()}" min="0" required>
+                                                       th:value="${product.getQuantity()}" min="1" required>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="shoping__cart__total" th:name="|products[${iterStat.index}].total|"
-                                        th:value="${product.getTotal()}">
+                                    <td class="shoping__cart__total"
+                                       >$
+
                                     </td>
+                                    <input  class="shoping__cart__total-per-item" th:name="|products[${iterStat.index}].total|" type="hidden" th:value="${product.getTotal()}">
+
                                     <td class="shoping__cart__item__close">
+                                        <a th:href="@{/product/cart/delete/{uid}/{pid}(pid=${product.getId()},uid=${n})}" style="color: red"><i class="fa fa-times"></i></a>
                                     </td>
+
                                 </tr>
                                 </tbody>
                             </table>
