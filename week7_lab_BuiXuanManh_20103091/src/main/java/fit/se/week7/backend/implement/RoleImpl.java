@@ -1,6 +1,7 @@
 package fit.se.week7.backend.implement;
 
 import fit.se.week7.backend.enums.RoleName;
+import fit.se.week7.backend.enums.UserStatus;
 import fit.se.week7.backend.models.Role;
 import fit.se.week7.backend.repositories.RoleRepository;
 import fit.se.week7.backend.services.RoleService;
@@ -26,5 +27,10 @@ public class RoleImpl implements RoleService {
     @Override
     public Role save(Role role) {
         return repository.save(role);
+    }
+
+    @Override
+    public List<Role> findByUserName(String name) {
+        return repository.findByUserName(name, UserStatus.ACTIVE);
     }
 }

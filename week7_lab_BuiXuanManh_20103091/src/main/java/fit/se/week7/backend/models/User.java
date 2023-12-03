@@ -1,6 +1,7 @@
 package fit.se.week7.backend.models;
 
 import fit.se.week7.backend.enums.RoleName;
+import fit.se.week7.backend.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,5 +19,6 @@ public class User {
     private String userName;
     private String passWord;
     private String email;
-
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 }

@@ -37,7 +37,9 @@ body {
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 }
-
+.btn{
+	color: white;
+}
 h1,
 h2,
 h3,

@@ -12,4 +12,5 @@ public interface RoleService {
     List<Role> getAll();
     Optional<Role> findByRoleName(RoleName name);
     Role save(Role role);
+    List<Role> findByUserName(String name);
 }

@@ -1,6 +1,7 @@
 package fit.se.week7.backend.implement;
 
 import fit.se.week7.backend.enums.UserRoleStatus;
+import fit.se.week7.backend.enums.UserStatus;
 import fit.se.week7.backend.models.User;
 import fit.se.week7.backend.repositories.UserRepository;
 import fit.se.week7.backend.services.UserService;
@@ -26,7 +27,7 @@ public class UserImplement implements UserService {
 
     @Override
     public List<User> getAll() {
-        return repository.findAll();
+        return repository.findAll(UserStatus.ACTIVE);
     }
 
     @Override

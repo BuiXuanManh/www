@@ -3,6 +3,7 @@ package fit.se.week7.backend.controller;
 import fit.se.week7.backend.dto.SignupDto;
 import fit.se.week7.backend.enums.RoleName;
 import fit.se.week7.backend.enums.UserRoleStatus;
+import fit.se.week7.backend.enums.UserStatus;
 import fit.se.week7.backend.models.Customer;
 import fit.se.week7.backend.models.Role;
 import fit.se.week7.backend.models.User;
@@ -74,7 +75,7 @@ public class UserController {
         if (f.isPresent() || e.isPresent() || !dto.getPassWord().equalsIgnoreCase(dto.getConfirmPassWord())) {
             return "errorLogin";
         }
-        User u = new User(dto.getUserName(), dto.getPassWord(), dto.getEmail());
+        User u = new User(dto.getUserName(), dto.getPassWord(), dto.getEmail(), UserStatus.ACTIVE);
         Optional<Role> r = roleService.findByRoleName(RoleName.USER);
         UserRolePK pk= new UserRolePK(u,r.get());
         UserRole userRole= new UserRole(pk, UserRoleStatus.ACTIVE);
