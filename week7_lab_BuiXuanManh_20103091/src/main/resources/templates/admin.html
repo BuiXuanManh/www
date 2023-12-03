@@ -63,37 +63,39 @@
                     <a class="btn btn-primary m-3" style="color: white">Add User</a>
                 </div>
                 <div class="row">
-                    <table th:if="${select==null|| select==''||select=='acc'}" class="table table-striped table-hover table-bordered">
+                    <table th:if="${select==null|| select==''||select=='acc'}"
+                           class="table table-striped table-hover table-bordered">
                         <thead>
-                        <tr >
+                        <tr>
                             <th>Username</th>
                             <th>Password</th>
                             <th>Email</th>
                             <th>Status</th>
-                            <th>
                             <th>Grant User</th>
                             <th>Grant Admin</th>
-                            </th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="user:${users}">
-                            <th th:text="${user.getUser().getUserName()}"></th>
-                            <th th:text="${user.getUser().getPassWord()}"></th>
-                            <th th:text="${user.getUser().getEmail()}"></th>
-                            <th th:text="${user.getUser().getStatus()}"></th>
-                            <th th:each="role:${user.getRoles()}">
-                            <th>
-                                <input type="checkbox" name="userGrant" th:checked="${role.roleName == 'USER'}" />
-                            </th>
-                            <th>
-                                <input type="checkbox" name="adminGrant" th:checked="${role.roleName == 'ADMIN'}" />
-                            </th>
-                            </th>
-                            <th><a style="color: white" class="btn btn-primary">Update</a>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.getUser().getUserName()}"></td>
+                            <td th:text="${user.getUser().getPassWord()}"></td>
+                            <td th:text="${user.getUser().getEmail()}"></td>
+                            <td th:text="${user.getUser().getStatus()}"></td>
+                            <div th:each="role : ${user.getRoles()}">
+                                <td th:if="${role != null and role.getRoleName() == 'USER'}">
+                                    <input  type="checkbox" name="userGrant"
+                                           th:checked="${role != null and role.getRoleName() == 'USER'}"/>
+                                </td>
+                                <td  th:if="${role != null and role.getRoleName() == 'ADMIN'}">
+                                    <input type="checkbox" name="adminGrant"
+                                           th:checked="${role != null and role.getRoleName() == 'ADMIN'}"/>
+                                </td>
+                            </div>
+                            <td>
+                                <a style="color: white" class="btn btn-primary">Update</a>
                                 <a style="color: white" class="btn btn-danger">Delete</a>
-                            </th>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

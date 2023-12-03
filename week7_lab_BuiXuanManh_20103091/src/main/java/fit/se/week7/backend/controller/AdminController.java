@@ -43,6 +43,7 @@ public class AdminController {
         List<UserDto> listDto= new ArrayList<>();
         for(User u: list){
             List<Role> listR = roleService.findByUserName(u.getUserName());
+            System.out.println(listR);
             UserDto dto= new UserDto(u,listR);
             listDto.add(dto);
         }
