@@ -50,9 +50,7 @@ public class ProductController {
     private List<CheckoutDto> list = new ArrayList();
     @PostMapping(value = "/check", consumes = "application/x-www-form-urlencoded")
     public String check(@ModelAttribute("checkoutForm") CheckoutForm checkoutForm,@RequestParam(name = "userName", required = false) String userName, Model model, RedirectAttributes attributes){
-        System.out.println(checkoutForm);
         List<CheckoutDto> products = checkoutForm.getProducts();
-        System.out.println(products);
         DecimalFormat decimalFormat = new DecimalFormat("#.0");
         double total=0;
         for(CheckoutDto d : products) {
@@ -84,7 +82,6 @@ public class ProductController {
         Optional<User> u = userService.findByUserName(userName);
         Optional<Employee> e = employeeService.findById(emp.getId());
         Optional<Customer> cus = customerService.findByEmail(dto.getEmail());
-        System.out.println(checkoutForm);
         if(cus.isEmpty()||u.isEmpty()||!u.get().getPassWord().equalsIgnoreCase(dto.getPassWord())){
             return "errorLogin";
         }
@@ -120,7 +117,6 @@ public class ProductController {
                 orderDetailsService.save(od);
             }
             String formattedTotal = decimalFormat.format(total);
-            System.out.println(formattedTotal);
 
         }
        return  "redirect:/product/index?userName="+userName;

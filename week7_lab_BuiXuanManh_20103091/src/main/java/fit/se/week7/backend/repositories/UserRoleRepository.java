@@ -14,4 +14,8 @@ import java.util.List;
 public interface UserRoleRepository extends JpaRepository<UserRole, UserRolePK> {
     @Query("select ur from UserRole ur join User u on u.userName=ur.userRolePK.user.userName where u.status=:status and ur.status=:status")
     List<UserRole> findAll(@Param("status")UserStatus userStatus);
+
+
+    @Query("select ur from UserRole ur where ur.userRolePK.user.userName=:id")
+    List<UserRole> findByUserName(@Param("id") String userName);
 }

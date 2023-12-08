@@ -12,4 +12,5 @@ public interface UserRoleService {
     List<UserRole> getAll();
     Optional<UserRole> findById(UserRolePK userRolePK);
     UserRole save(UserRole userRole);
+    List<UserRole> findByUserName(String userName);
 }

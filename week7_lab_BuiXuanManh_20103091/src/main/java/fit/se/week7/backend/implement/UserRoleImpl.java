@@ -29,4 +29,9 @@ public class UserRoleImpl implements UserRoleService {
     public UserRole save(UserRole userRole) {
         return repository.save(userRole);
     }
+
+    @Override
+    public List<UserRole> findByUserName(String userName) {
+        return repository.findByUserName(userName);
+    }
 }

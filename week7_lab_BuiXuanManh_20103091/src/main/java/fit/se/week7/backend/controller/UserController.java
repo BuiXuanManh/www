@@ -66,9 +66,7 @@ public class UserController {
     @PostMapping("/signup")
     public String signup(@ModelAttribute("signupDto") SignupDto dto, @ModelAttribute("user") User user) {
         Optional<User> f = service.findByUserName(dto.getUserName());
-        System.out.println(f);
         Optional<User> e = service.findByEmail(dto.getEmail());
-        System.out.println(e);
         if (dto.getUserName() == null || dto.getEmail() == null) {
             return "errorLogin";
         }
@@ -76,6 +74,7 @@ public class UserController {
             return "errorLogin";
         }
         User u = new User(dto.getUserName(), dto.getPassWord(), dto.getEmail(), UserStatus.ACTIVE);
+        userService.save(u);
         Optional<Role> r = roleService.findByRoleName(RoleName.USER);
         UserRolePK pk= new UserRolePK(u,r.get());
         UserRole userRole= new UserRole(pk, UserRoleStatus.ACTIVE);
@@ -86,7 +85,6 @@ public class UserController {
 
         } else
             customerService.save(c);
-        userService.save(u);
         return "signIn";
     }
 

@@ -17,7 +17,7 @@ public class UserImplement implements UserService {
     private UserRepository repository;
     @Override
     public Optional<User> findByUserName(String username) {
-        return repository.findById(username,UserRoleStatus.ACTIVE);
+        return repository.findById(username,UserStatus.ACTIVE);
     }
 
     @Override
