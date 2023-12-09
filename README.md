@@ -77,14 +77,19 @@ xóa, sửa và cấp quyền).
    <br/>
 - Servlet run data.
 <br/>
+
 # www_week4
 <br/>
 CRUD Employee Spring boot
+<br/>
 - find
+  <br/>
 - count
+<br/>
 - update
-- getAll
-- insert
+<br/>
+- getAll<br/>
+- insert<br/>
 - delete
 <br/>
 Run basic CRUD spring with jdbc
