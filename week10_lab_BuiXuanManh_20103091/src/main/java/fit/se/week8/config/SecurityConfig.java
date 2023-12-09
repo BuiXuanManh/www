@@ -22,7 +22,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
     @Autowired
     public void globalConfig(AuthenticationManagerBuilder auth, PasswordEncoder encoder, DataSource dataSource) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource)
+        auth.jdbcAuthentication().dataSource(dataSource).withDefaultSchema()
                 .withUser(User.withUsername("admin")
                         .password(encoder.encode("admin"))
                         .roles("ADMIN")

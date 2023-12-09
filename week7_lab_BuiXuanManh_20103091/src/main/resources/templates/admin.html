@@ -85,7 +85,7 @@
                                 <input type="hidden" name="userName" th:value="${user.getUser().getUserName().toString()}"/>
 
                                 <td th:each="role : ${listRole}">
-                                    <input th:each="userRole : ${user.getRoles()}"
+                                    <input
                                            type="checkbox" name="roles"
                                            th:value="${role.getRoleName()}"
                                            th:checked="${#lists.contains(user.getRoles(), role)}"
