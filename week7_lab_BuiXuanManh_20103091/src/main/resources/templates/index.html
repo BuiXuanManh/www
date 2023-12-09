@@ -164,27 +164,27 @@
     <div class="row justify-content-center" style="font-weight: bold;">
         <div th:if="${pageProduct.totalPages > 0}">
             <a class="btn btn-secondary" th:if="${pageNumbers.size() > 1 && pageProduct.number >0}"
-               th:href="@{/product/index(size=${pageProduct.size}, page=1)}">&lt;&lt;</a>
+               th:href="@{/product/index(size=${pageProduct.size},userName=${n}, page=1)}">&lt;&lt;</a>
             <a class="btn btn-secondary"  th:if="${pageProduct.number > 0}"
-               th:href="@{/product/index(size=${pageProduct.size}, page=${pageProduct.number})}">&lt;</a>
+               th:href="@{/product/index(size=${pageProduct.size},userName=${n}, page=${pageProduct.number})}">&lt;</a>
 
             <span th:each="pageNumber : ${pageNumbers}" th:class="${pageNumber == pageProduct.number + 1}? 'active'">
 <!--                <a th:if="${pageNumber != pageProduct.number + 1}" th:href="@{/product/sort(size=${pageProduct.size}, page=${pageNumber})}" th:text="${pageNumber}"></a>-->
                  <a th:if="${pageNumber >= 1 && pageNumber <= 3 && pageProduct.number==0 && pageNumber != pageProduct.number + 1}"
-                    th:href="@{/product/index(size=${pageProduct.size}, page=${pageNumber})}"
+                    th:href="@{/product/index(size=${pageProduct.size},userName=${n}, page=${pageNumber})}"
                     th:text="${pageNumber}"></a>
                 <a th:if="${pageNumber >= pageProduct.number && pageNumber <= pageProduct.number + 2 && pageNumber != pageProduct.number + 1 && pageProduct.number != 0 && pageProduct.number != pageProduct.totalPages - 1}"
-                   th:href="@{/product/index(size=${pageProduct.size}, page=${pageNumber})}" th:text="${pageNumber}"></a>
+                   th:href="@{/product/index(size=${pageProduct.size},userName=${n}, page=${pageNumber})}" th:text="${pageNumber}"></a>
                 <!-- Hiển thị số trang cho trang cuối -->
         <a th:if="${pageNumber >= pageProduct.totalPages - 2 && pageNumber <= pageProduct.totalPages && pageProduct.number == pageProduct.totalPages - 1 &&pageNumber != pageProduct.number + 1}"
-           th:href="@{/product/index(size=${pageProduct.size}, page=${pageNumber})}" th:text="${pageNumber}"></a>
+           th:href="@{/product/index(size=${pageProduct.size},userName=${n}, page=${pageNumber})}" th:text="${pageNumber}"></a>
             <span th:if="${pageNumber == pageProduct.number + 1}" th:text="${pageNumber}"></span>
             </span>
 
             <a class="btn btn-secondary"  th:if="${pageProduct.number < pageProduct.totalPages - 1}"
-               th:href="@{/product/index(size=${pageProduct.size}, page=${pageProduct.number + 2})}">&gt;</a>
+               th:href="@{/product/index(size=${pageProduct.size},userName=${n}, page=${pageProduct.number + 2})}">&gt;</a>
             <a class="btn btn-secondary"  th:if="${pageNumbers.size() > 1 && pageProduct.number < pageProduct.totalPages - 1}"
-               th:href="@{/product/index(size=${pageProduct.size}, page=${pageProduct.totalPages})}">&gt;&gt;</a>
+               th:href="@{/product/index(size=${pageProduct.size},userName=${n}, page=${pageProduct.totalPages})}">&gt;&gt;</a>
         </div>
     </div>
 </section>
