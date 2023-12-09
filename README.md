@@ -74,9 +74,10 @@ xóa, sửa và cấp quyền).
 - Thống kê order theo khoảng thời gian (from date-> to date).
    <br>
 - Thống kê order theo nhân viên bán hàng trong 1 khoảng thời gian  (from date-> to date).
-   <br>
+   <br/>
 - Servlet run data.
-# www _week3
+<br/>
+# www _week4
 CRUD Employee Spring boot
 - find
 - count
@@ -84,6 +85,11 @@ CRUD Employee Spring boot
 - getAll
 - insert
 - delete
+<br/>
+Run basic CRUD spring with jdbc
+<br/>
+<img src="https://github.com/BuiXuanManh/www/assets/91316469/7471f3c6-5ffa-4319-9dee-bf63b50a46b4"/>
+
 # www _week5
 CRUD Address Spring Boot use Spring Data JPA
 - Create Database
