@@ -40,8 +40,7 @@ public class AdminController {
     @PostMapping("/save")
     public String saveChanges(
             @RequestParam(name = "userName", required = false) String userName,
-            @ModelAttribute("listDto") ListDto userCheckedDtos, HttpServletRequest request) {
-        System.out.println(userCheckedDtos);
+             HttpServletRequest request) {
 //        for (UserCheckedDto dto : userCheckedDtos.getList()) {
 //            String uid = dto.getUserName();
 //            Optional<User> u = userService.findByUserName(uid);

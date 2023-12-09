@@ -82,7 +82,7 @@
                                 <td th:text="${user.getUser().getStatus()}"></td>
 
                                 <!-- Trỏ userId -->
-                                <input type="hidden" name="list[__${userStat.index}__].userName" th:field="*{list[__${userStat.index}__].userName}" th:value="${user.getUser().getUserName().toString()}"/>
+                                <input type="hidden" name="userName" th:value="${user.getUser().getUserName().toString()}"/>
 
                                 <td th:each="role : ${listRole}">
                                     <input th:each="userRole : ${user.getRoles()}"
@@ -93,6 +93,7 @@
                                            th:attr="data-userid=${user.getUser().getUserName()}, data-role=${role.getRoleName().toString()}"
                                            onchange="this.form.submit()"/>
                                 </td>
+
 
 
                                 <script>
