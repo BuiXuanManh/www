@@ -20,3 +20,5 @@
   Một trang html hiển thị cửa sổ đăng nhập. Nếu đăng nhập thành công và là quyền admin
 thì hiển thị trang dashboard cho phép quản lý các account khác (bao gồm các quyền thêm,
 xóa, sửa và cấp quyền).
+- Login page <br/>
+<img src="https://github.com/BuiXuanManh/www/assets/91316469/2e8ca320-e40b-4e9f-9ab0-287cc98cb849" />
