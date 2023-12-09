@@ -18,5 +18,5 @@ Login
 <br/>
 - Khi click các kỹ năng còn thiếu
 <br/>
-<img src="https://github.com/BuiXuanManh/www/assets/91316469/a671049f-4603-4b5a-8659-dfbe0b355774" />
+<img src="https://github.com/BuiXuanManh/www/assets/91316469/63652882-bada-43cd-879f-2f91a6078558" />
 <br/>
