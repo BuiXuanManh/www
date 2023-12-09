@@ -40,6 +40,7 @@ public class AccountImplement implements AccountService {
     @Override
     public void delete(Account a) {
         a.setStatus(AccountStatus.DELETED);
+        repository.updateAccount(a);
     }
 
     @Override

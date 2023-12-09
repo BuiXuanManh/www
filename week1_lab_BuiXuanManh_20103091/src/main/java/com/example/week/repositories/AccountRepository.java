@@ -54,7 +54,7 @@ public class AccountRepository {
         return l;
     }
     public List<Account> findByNotAdmin(String name){
-        List<Account> l= em.createNamedQuery("Account.findByRoleNotAdmin", Account.class).setParameter("role",name).getResultList();
+        List<Account> l= em.createNamedQuery("Account.findByRoleNotAdmin", Account.class).setParameter("role",name).setParameter("status",AccountStatus.ACTIVE).getResultList();
         return l;
     }
     public Role findRole(String username){

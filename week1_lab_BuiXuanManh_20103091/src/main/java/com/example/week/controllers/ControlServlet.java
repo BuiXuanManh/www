@@ -68,7 +68,10 @@ public class ControlServlet extends HttpServlet {
                     resp.sendRedirect("error.jsp");
                 } else {
                     accountService.delete(acc.get());
-                    req.getRequestDispatcher("dashboard.jsp").forward(req, resp);
+                    List<Account> ali = accountService.findByNotAdmin("ADMIN");
+                    req.setAttribute("listAcc", ali);
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("dashboard.jsp");
+                    dispatcher.forward(req, resp);
                 }
             } else if ("viewLog".equals(action)) {
                 String id = req.getParameter("id");
@@ -188,7 +191,10 @@ public class ControlServlet extends HttpServlet {
                     a.setFull_name(fullname);
                     a.setStatus(AccountStatus.ACTIVE);
                     accountService.update(a);
-                    resp.sendRedirect("dashboard.jsp");
+                    List<Account> ali = accountService.findByNotAdmin("ADMIN");
+                    req.setAttribute("listAcc", ali);
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("dashboard.jsp");
+                    dispatcher.forward(req, resp);
                 }
             } else if ("grantP".equals(action)) {
                 u = req.getParameter("id");

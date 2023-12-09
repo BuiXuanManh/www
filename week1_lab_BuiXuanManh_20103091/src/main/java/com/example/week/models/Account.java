@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "Account.getAll",query = "select a from Account a where a.status=:status"),
         @NamedQuery(name = "Account.findById",query = "select  a from Account a where a.account_id=:id"),
-        @NamedQuery(name = "Account.findByRoleNotAdmin", query = "SELECT a FROM Account a JOIN GrantAccess g ON a.account_id = g.account.account_id WHERE a.status=1 and (g.role.role_name = :role AND g.grantStatus = 0) or a.account_id NOT IN (SELECT a1.account_id FROM Account a1 JOIN GrantAccess g ON a1.account_id = g.account.account_id WHERE g.role.role_name = :role AND g.grantStatus = 1)")
+        @NamedQuery(name = "Account.findByRoleNotAdmin", query = "SELECT a FROM Account a JOIN GrantAccess g ON a.account_id = g.account.account_id WHERE a.status=:status and (g.role.role_name = :role AND g.grantStatus = 0) or a.account_id NOT IN (SELECT a1.account_id FROM Account a1 JOIN GrantAccess g ON a1.account_id = g.account.account_id WHERE g.role.role_name = :role AND g.grantStatus = 1 and a.status=:status)")
 
 })
 public class Account {

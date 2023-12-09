@@ -1,79 +1,66 @@
-<%--
+<%@ page import="iuh.fit.week2.models.Employee" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: bmanh
-  Date: 11/11/2023
-  Time: 8:31 PM
+  Date: 9/30/2023
+  Time: 1:33 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login</title>
-
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet"/>
-    <link href="css/login.css" rel="stylesheet"/>
+    <title>Title</title>
+    <%
+    List<Employee> l= (List<Employee>) request.getAttribute("employees");
+    %>
 </head>
 <body>
+<h1>Employee Management</h1>
 
-<div class="section">
-    <div class="container">
-        <div class="row full-height justify-content-center">
-            <div class="col-12 text-center align-self-center py-5">
-                <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                    <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
-                    <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
-                    <label for="reg-log"></label>
-                    <div class="card-3d-wrap mx-auto">
-                        <div class="card-3d-wrapper">
-                            <div class="card-front">
-                                <div class="center-wrap">
-                                    <div class="section text-center">
-                                        <h4 class="mb-4 pb-3">Log In</h4>
-                                        <div class="form-group">
-                                            <input type="email" name="logemail" class="form-style" placeholder="Your Email"  autocomplete="off">
-                                            <i class="input-icon uil uil-at"></i>
-                                        </div>
-                                        <div class="form-group mt-2">
-                                            <input type="password" name="logpass" class="form-style" placeholder="Your Password"  autocomplete="off">
-                                            <i class="input-icon uil uil-lock-alt"></i>
-                                        </div>
-                                        <a href="#" class="btn mt-4">submit</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <div class="center-wrap">
-                                    <div class="section text-center">
-                                        <h4 class="mb-4 pb-3">Sign Up</h4>
-                                        <div class="form-group">
-                                            <input type="text" name="logname" class="form-style" placeholder="Your Full Name"  autocomplete="off">
-                                            <i class="input-icon uil uil-user"></i>
-                                        </div>
-                                        <div class="form-group mt-2">
-                                            <input type="email" name="logemail" class="form-style" placeholder="Your Email"  autocomplete="off">
-                                            <i class="input-icon uil uil-at"></i>
-                                        </div>
-                                        <div class="form-group mt-2">
-                                            <input type="password" name="logpass" class="form-style" placeholder="Your Password"  autocomplete="off">
-                                            <i class="input-icon uil uil-lock-alt"></i>
-                                        </div>
-                                        <a href="#" class="btn mt-4">submit</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Form để thêm mới Employee -->
+<form action="/api/ControlServlet?action=create" method="POST">
+    <label >Full Name:</label>
+    <input type="text" name="fullName" required><br>
+    <label >Date of Birth (yyyy-MM-dd):</label>
+    <input type="text" name="dob" required><br>
+    <label >Email:</label>
+    <input type="text" name="email" required><br>
+    <label >Phone:</label>
+    <input type="text" name="phone" required><br>
+    <label >Address:</label>
+    <input type="text" name="address" required><br>
+    <input type="submit" value="Create Employee">
+</form>
+
+<!-- Danh sách Employee -->
+<h2>List of Employees</h2>
+<table >
+    <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Date of Birth</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    <% for (Employee e:l){%>
+        <tr>
+            <td><%e.getEmpId();%></td>
+            <td><%e.getFullName();%></td>
+            <td><%e.getDob();%></td>
+            <td><%e.getEmail();%></td>
+            <td><%e.getPhone();%></td>
+            <td><%e.getAddress();%></td>
+            <td><%e.getStatus();%></td>
+            <td>
+                <a href="/api/ControlServlet?action=edit&&id=<%e.getEmpId();%>">Edit</a>
+                <a href="/api/ControlServlet?action=delete&&id=<%e.getEmpId();%>">Delete</a>
+            </td>
+        </tr>
+        <%}%>
+
+</table>
 </body>
 </html>

@@ -59,9 +59,9 @@
                         </div>
                     </div>
                 </div>
-<!--                <form th:action="@{/admin/save(userName=${n})}" method="post">-->
+                <form th:action="@{/admin/save(userName=${n})}" method="post">
                     <div class="row">
-                        <table th:if="${select==null|| select==''||select=='acc'}"
+                        <table th:if="${select==null || select=='' || select=='acc'}"
                                class="table table-striped table-hover table-bordered">
                             <thead>
                             <tr>
@@ -75,84 +75,29 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="user : ${users}">
+                            <tr th:each="user, userStat : ${users}" th:object="${listDto}">
                                 <td th:text="${user.getUser().getUserName()}"></td>
                                 <td th:text="${user.getUser().getPassWord()}"></td>
                                 <td th:text="${user.getUser().getEmail()}"></td>
                                 <td th:text="${user.getUser().getStatus()}"></td>
-                                <input type="hidden" name="userId" th:value="${user.getUser().getUserName().toString()}"/>
+
+                                <!-- Trỏ userId -->
+                                <input type="hidden" name="list[__${userStat.index}__].userName" th:field="*{list[__${userStat.index}__].userName}" th:value="${user.getUser().getUserName().toString()}"/>
 
                                 <td th:each="role : ${listRole}">
-                                    <input
-                                            type="checkbox" name="roles"
-                                            th:value="${role}"
-                                            th:checked="${user.getRoles().contains(role)}"
-                                            th:attr="data-id=${n}, data-userid=${user.getUser().getUserName()}, data-role=${role.getRoleName()}"
-                                            onchange="toggleCheckboxValue(this)"/>
+                                    <input th:each="userRole : ${user.getRoles()}"
+                                           type="checkbox" name="roles"
+                                           th:value="${role.getRoleName()}"
+                                           th:checked="${#lists.contains(user.getRoles(), role)}"
+
+                                           th:attr="data-userid=${user.getUser().getUserName()}, data-role=${role.getRoleName().toString()}"
+                                           onchange="this.form.submit()"/>
                                 </td>
 
+
                                 <script>
-                                    var userList=[];
-                                    var id="";
                                     function toggleCheckboxValue(checkbox) {
-                                        var userId = checkbox.getAttribute('data-userid');
-                                        var role = checkbox.getAttribute('data-role');
-                                        id= checkbox.getAttribute('data-id');
-                                        var isChecked = checkbox.checked;
-
-                                        // Gọi hàm để cập nhật giá trị trong đối tượng UserDTO
-                                        updateDto(userId, role, isChecked);
-                                    }
-
-                                    function updateDto(userId, role, isChecked) {
-                                        // Tìm đối tượng UserDTO tương ứng trong danh sách
-                                        var userDto = userList.find(user => user.userId === userId);
-
-                                        // Nếu tìm thấy, kiểm tra xem role đã tồn tại chưa
-                                        if (userDto) {
-                                            var existingRole = userDto.roles.find(r => r.role === role);
-
-                                            // Nếu role đã tồn tại, cập nhật giá trị isChecked
-                                            if (existingRole) {
-                                                existingRole.isChecked = isChecked;
-                                            } else {
-                                                // Nếu role chưa tồn tại, thêm mới role vào danh sách
-                                                userDto.roles.push({
-                                                    roleName: role,
-                                                    check: isChecked
-                                                });
-                                            }
-                                        } else {
-                                            // Nếu không tìm thấy, thêm mới đối tượng UserDTO vào danh sách
-                                            userList.push({
-                                                userName: userId,
-                                                roles: [{
-                                                    roleName: role,
-                                                    check: isChecked
-                                                }]
-                                            });
-                                        }
-
-                                        // In ra console danh sách người dùng hiện tại
-                                        console.log("da:", userList);
-                                    }
-                                    var userCheckedDtos={}
-                                    var list={}
-                                    function HandleCAll(){
-                                        list=userList;
-                                        console.log(userCheckedDtos)
-                                        var jsonData = JSON.stringify({ list });
-                                        console.log(jsonData)
-                                        fetch('http://localhost:8080/admin/save?userName='+id,{
-                                            method: 'POST',
-                                            headers: {
-                                                'Content-Type': 'application/json'
-                                            },
-                                            body: jsonData
-                                        }).then()
-                                            .catch(error => {
-                                                console.error('error:', error);
-                                            });
+                                        checkbox.value = checkbox.checked ? 'true' : 'false';
                                     }
                                 </script>
 
@@ -161,16 +106,14 @@
                                     <a style="color: white" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
-
-
                             </tbody>
                         </table>
-
                     </div>
                     <div class="row m-3">
-                        <button type="button" onclick="HandleCAll()" class="btn btn-success m-3" style="color: white">Save changes</button>
+                        <button type="submit" class="btn btn-success m-3" style="color: white">Save changes</button>
                     </div>
-<!--                </form>-->
+                </form>
+
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container">
+<div class="container justify-content-center">
     <div class="row">
         <h1>Đăng Nhập</h1>
     </div>

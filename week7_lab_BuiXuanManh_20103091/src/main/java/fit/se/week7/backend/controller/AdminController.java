@@ -40,36 +40,37 @@ public class AdminController {
     @PostMapping("/save")
     public String saveChanges(
             @RequestParam(name = "userName", required = false) String userName,
-            @RequestBody ListDto userCheckedDtos, HttpServletRequest request) {
-        for (UserCheckedDto dto : userCheckedDtos.getList()) {
-            String uid = dto.getUserName();
-            Optional<User> u = userService.findByUserName(uid);
-            if (u.isEmpty()) return "errorLogin";
-            List<CheckedDto> roles = dto.getRoles();
-            for (CheckedDto c : roles) {
-                Optional<Role> r = roleService.findByRoleName(RoleName.valueOf(c.getRoleName()));
-                if (c.isCheck()) {
-                    UserRolePK pk = new UserRolePK(u.get(), r.get());
-                    Optional<UserRole> ur = userRoleService.findById(pk);
-                    if (ur.isEmpty()) {
-                        UserRole uu = new UserRole(pk, UserRoleStatus.ACTIVE);
-                        userRoleService.save(uu);
-                    } else {
-                        UserRole uu = ur.get();
-                        uu.setStatus(UserRoleStatus.ACTIVE);
-                        userRoleService.save(uu);
-                    }
-                } else {
-                    UserRolePK pk = new UserRolePK(u.get(), r.get());
-                    Optional<UserRole> ur = userRoleService.findById(pk);
-                    if (ur.isPresent()) {
-                        UserRole uu = ur.get();
-                        uu.setStatus(UserRoleStatus.DELETE);
-                        userRoleService.save(uu);
-                    }
-                }
-            }
-        }
+            @ModelAttribute("listDto") ListDto userCheckedDtos, HttpServletRequest request) {
+        System.out.println(userCheckedDtos);
+//        for (UserCheckedDto dto : userCheckedDtos.getList()) {
+//            String uid = dto.getUserName();
+//            Optional<User> u = userService.findByUserName(uid);
+//            if (u.isEmpty()) return "errorLogin";
+//            List<CheckedDto> roles = dto.getRoles();
+//            for (CheckedDto c : roles) {
+//                Optional<Role> r = roleService.findByRoleName(RoleName.valueOf(c.getRoleName()));
+//                if (c.isCheck()) {
+//                    UserRolePK pk = new UserRolePK(u.get(), r.get());
+//                    Optional<UserRole> ur = userRoleService.findById(pk);
+//                    if (ur.isEmpty()) {
+//                        UserRole uu = new UserRole(pk, UserRoleStatus.ACTIVE);
+//                        userRoleService.save(uu);
+//                    } else {
+//                        UserRole uu = ur.get();
+//                        uu.setStatus(UserRoleStatus.ACTIVE);
+//                        userRoleService.save(uu);
+//                    }
+//                } else {
+//                    UserRolePK pk = new UserRolePK(u.get(), r.get());
+//                    Optional<UserRole> ur = userRoleService.findById(pk);
+//                    if (ur.isPresent()) {
+//                        UserRole uu = ur.get();
+//                        uu.setStatus(UserRoleStatus.DELETE);
+//                        userRoleService.save(uu);
+//                    }
+//                }
+//            }
+//        }
 //        request.getRequestDispatcher("/admin?userName=" + userName + "&select=acc");
         return "redirect:/admin?userName=" + userName + "&select=acc";
     }
@@ -108,10 +109,12 @@ public class AdminController {
 //            List<UserRole> ur = userRoleService.findByUserName(u.getUserName());
 //            u.setUserRoles(ur);
 //            System.out.println(u);
-            ;
+
             UserDto dto = new UserDto(u, listR);
             listDto.add(dto);
         }
+        ListDto userCheckedDtos= new ListDto();
+        model.addAttribute("listDto",userCheckedDtos);
         model.addAttribute("listRole", listRoles);
         model.addAttribute("users", listDto);
     }
