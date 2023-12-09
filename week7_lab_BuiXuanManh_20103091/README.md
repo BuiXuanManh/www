@@ -26,6 +26,6 @@ Web Shoopping
 <img src="https://github.com/BuiXuanManh/www/assets/91316469/e1b0fb75-4a15-43fb-ba21-a287cefed020" />
 <br/>
 - Chi tiết xem ở video.mp4<br/>
-link:
+link: https://youtu.be/NUgTY4uTzWs
 <br/>
   
